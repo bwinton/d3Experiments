@@ -10,18 +10,18 @@ globalstrict:true, nomen:false, newcap:false */
 
 "use strict";
 
-var tiles = [
-  {'x': 19.4, 'y': 22.7, 'width': 35.3, 'height': 18.2},
-  {'x': 57.4, 'y': 22.7, 'width': 35.3, 'height': 18.2},
-  {'x': 95.4, 'y': 22.7, 'width': 35.3, 'height': 18.2},
-  {'x': 19.4, 'y': 43.7, 'width': 35.3, 'height': 18.2},
-  {'x': 57.4, 'y': 43.7, 'width': 35.3, 'height': 18.2},
-  {'x': 95.4, 'y': 43.7, 'width': 35.3, 'height': 18.2},
-  {'x': 19.4, 'y': 64.7, 'width': 35.3, 'height': 18.2},
-  {'x': 57.4, 'y': 64.7, 'width': 35.3, 'height': 18.2},
-  {'x': 95.4, 'y': 64.7, 'width': 35.3, 'height': 18.2},
-  {'x': 95.4, 'y': 85, 'width': 35.3, 'height': 10},
-];
+var widgets = {
+  'tile1': {'x': 19.4, 'y': 22.7, 'width': 35.3, 'height': 18.2},
+  'tile2': {'x': 57.4, 'y': 22.7, 'width': 35.3, 'height': 18.2},
+  'tile3': {'x': 95.4, 'y': 22.7, 'width': 35.3, 'height': 18.2},
+  'tile4': {'x': 19.4, 'y': 43.7, 'width': 35.3, 'height': 18.2},
+  'tile5': {'x': 57.4, 'y': 43.7, 'width': 35.3, 'height': 18.2},
+  'tile6': {'x': 95.4, 'y': 43.7, 'width': 35.3, 'height': 18.2},
+  'tile7': {'x': 19.4, 'y': 64.7, 'width': 35.3, 'height': 18.2},
+  'tile8': {'x': 57.4, 'y': 64.7, 'width': 35.3, 'height': 18.2},
+  'tile9': {'x': 95.4, 'y': 64.7, 'width': 35.3, 'height': 18.2},
+  'tileN': {'x': 95.4, 'y': 85, 'width': 35.3, 'height': 10},
+};
 
 
 
@@ -40,19 +40,19 @@ function draw(data) {
     .append('rect')
       .attr('class', 'bar')
       .style('fill', function (d) {
-        return 'rgba(255,0,0,' + (d/100) + ')';
+        return 'rgba(255,0,0,' + (d.value/100) + ')';
       }).attr({
-        'x': function (d, i) {
-          return tiles[i].x;
+        'x': function (d) {
+          return widgets[d.id].x;
         },
-        'y': function (d, i) {
-          return tiles[i].y;
+        'y': function (d) {
+          return widgets[d.id].y;
         },
-        'width': function (d, i) {
-          return tiles[i].width;
+        'width': function (d) {
+          return widgets[d.id].width;
         },
-        'height': function (d, i) {
-          return tiles[i].height;
+        'height': function (d) {
+          return widgets[d.id].height;
         }
       });
     chart.selectAll('label')
@@ -60,24 +60,35 @@ function draw(data) {
       .enter()
       .append('text')
       .attr({
-        'x': function (d, i) {
-          return tiles[i].x + tiles[i].width / 2;
+        'x': function (d) {
+          return widgets[d.id].x + widgets[d.id].width / 2;
         },
-        'y': function (d, i) {
-          return tiles[i].y + tiles[i].height / 2;
+        'y': function (d) {
+          return widgets[d.id].y + widgets[d.id].height / 2;
         },
         'dy': '0.5em',
-        'width': function (d, i) {
-          return tiles[i].width;
+        'width': function (d) {
+          return widgets[d.id].width;
         },
-        'height': function (d, i) {
-          return tiles[i].height;
+        'height': function (d) {
+          return widgets[d.id].height;
         },
         'class': 'label'
       }).text(function (d) {
-        return d + '%';
+        return d.value + '%';
       });
 }
 
-var data = [31.2, 18.1, 12.3, 8.9, 8.4, 6.3, 4.8, 4.5, 4.1, 1.6];
+var data = [
+  {'id': 'tile1', 'value': 31.2},
+  {'id': 'tile2', 'value': 18.1},
+  {'id': 'tile3', 'value': 12.3},
+  {'id': 'tile4', 'value': 8.9},
+  {'id': 'tile5', 'value': 8.4},
+  {'id': 'tile6', 'value': 6.3},
+  {'id': 'tile7', 'value': 4.8},
+  {'id': 'tile8', 'value': 4.5},
+  {'id': 'tile9', 'value': 4.1},
+  {'id': 'tileN', 'value': 1.6}
+];
 draw(data);
