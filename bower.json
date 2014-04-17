@@ -1,0 +1,23 @@
+{
+  "name": "d3",
+  "version": "0.0.1",
+  "homepage": "https://github.com/bwinton/d3Experiments",
+  "authors": [
+    "Blake Winton <bwinton@latte.ca>"
+  ],
+  "description": "A place for data-vis stuff I'm trying.",
+  "main": "index.html",
+  "keywords": [
+    "d3",
+    "experiments"
+  ],
+  "license": "MPL2",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
