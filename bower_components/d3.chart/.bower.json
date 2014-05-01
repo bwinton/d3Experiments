@@ -1,0 +1,15 @@
+{
+  "name": "d3.chart",
+  "homepage": "https://github.com/misoproject/d3.chart",
+  "version": "0.2.0",
+  "_release": "0.2.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.2.0",
+    "commit": "a333a5815a6116c7af8cb597b74457bba5397a09"
+  },
+  "_source": "https://github.com/misoproject/d3.chart.git",
+  "_target": "~0.2.0",
+  "_originalSource": "https://github.com/misoproject/d3.chart.git",
+  "_direct": true
+}
