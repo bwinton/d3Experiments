@@ -1,3 +1,6 @@
+body {
+}
+
 .chart {
   height: 95vh;
   width: 95vw;
@@ -8,4 +11,21 @@
   font-size: 5px;
   fill: #333;
   text-anchor: middle;
+}
+
+line {
+  stroke: black;
+  stroke-width: 0.1;
+}
+
+.axis text {
+  font: 3px Arial !important;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: gray;
+  stroke-width: 0.1;
+  shape-rendering: crispEdges;
 }

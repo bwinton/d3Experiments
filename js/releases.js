@@ -10,27 +10,65 @@ globalstrict:true, nomen:false, newcap:false */
 
 "use strict";
 
-var savedData;
-var savedChart;
-
 function draw(data) {
-  console.log("Got data!", data);
-  var chart = d3.select('.chart')
-    .chart('BarChart', {
-      transform: function(data) {
-        console.log("data", data);
-        return data.map(function(d) {
-          return { name : d.ProductVersion, value : d.Total };
-        });
-      }
-    }).yFormat(d3.format("s"))
-    .height(100)
-    .width(150);
+  var chart = d3.select('.chart');
 
-  savedChart = chart;
+  console.log("Length:", data.length);
+  console.log("Map:", data.map((d) => d.ProductVersion));
+  var xScale = d3.scale.linear()
+                 .domain([0, data.length])
+                 .range([0, 150]);
 
-  // render it with some data
-  chart.draw(data);
+  var yMax = d3.max(data.map((d) => d.Total));
+  var yScale = d3.scale.log()
+                 .domain([1, yMax])
+                 .range([90, 0]);
+  yScale.tickFormat(5, 's');
+  var s = d3.format('0.2s');
+
+  chart.append('g').attr({'id': 'bars'})
+    .selectAll('.bars').data(data).enter()
+    // <rect x="0" y="0" width="50" height="50" fill="green" />
+    .append('rect')
+      .attr('class', 'bar')
+      .style('fill', function (d) {
+        return 'rgba(255,0,0,' + ((90 - yScale(d.Total))/90) + ')';
+      }).attr({
+        'x': function (d, i) {
+          return xScale(i);
+        },
+        'y': function (d) {
+          return yScale(d.Total);
+        },
+        'width': function () {
+          return xScale(1);
+        },
+        'height': function (d) {
+          return 90 - yScale(d.Total);
+        }
+      }).append("svg:title")
+      .text((d) => d.ProductVersion + '/' + d.Percentage + '/' + s(d.Total));
+
+
+  var xAxis = d3.svg.axis()
+    .scale(xScale)
+    .orient('bottom')
+    .tickSize(1)
+    .tickFormat((x) => data[x].ProductVersion)
+    .ticks(10);
+  chart.append("g")
+    .attr('class', 'x axis')
+    .attr('transform', 'translate(0,90)')
+    .call(xAxis);
+
+  var yAxis = d3.svg.axis()
+    .scale(yScale)
+    .orient('left')
+    .tickSize(1)
+    .ticks(4, 's');
+  chart.append('g')
+    .attr('class', 'y axis')
+    .call(yAxis);
 }
 
 var ds = new Miso.Dataset({
@@ -38,10 +76,43 @@ var ds = new Miso.Dataset({
   delimiter : ","
 });
 
-ds.fetch().then(function (data) {
-  savedData = data;
-  console.log(data.columnNames());
-  console.log(data.length);
-  draw(data.toJSON().slice(0, 10));
-})
+var version;
 
+ds.fetch().then(function (data) {
+  draw(data.sort(function (rowA, rowB) {
+    var aVersion = /(\d+)(?:\.(\d+))?(?:\.(\d+))?(?:\.(\d+))?/.exec(rowA.ProductVersion);
+    if (aVersion) {
+      aVersion = aVersion.slice(1).map((d) => new Number(d));
+    }
+    var bVersion = /(\d+)(?:\.(\d+))?(?:\.(\d+))?(?:\.(\d+))?/.exec(rowB.ProductVersion);
+    if (bVersion) {
+      bVersion = bVersion.slice(1).map((d) => new Number(d));
+    }
+
+    if (aVersion === null && bVersion !== null) {
+      return 1;
+    } else if (aVersion !== null && bVersion === null) {
+      return -1
+    }
+
+    if (aVersion[0] > bVersion[0]) {
+      return -1;
+    }
+    if (aVersion[0] < bVersion[0]) {
+      return 1;
+    }
+    if (aVersion[1] > bVersion[1]) {
+      return -1;
+    }
+    if (aVersion[1] < bVersion[1]) {
+      return 1;
+    }
+    if (aVersion[2] > bVersion[2]) {
+      return -1;
+    }
+    if (aVersion[2] < bVersion[2]) {
+      return 1;
+    }
+    return 0;
+  }).toJSON());
+})
