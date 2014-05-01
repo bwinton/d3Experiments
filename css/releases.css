@@ -1,0 +1,11 @@
+.chart {
+  height: 95vh;
+  width: 95vw;
+  margin: 2.5vh;
+}
+
+.label {
+  font-size: 5px;
+  fill: #333;
+  text-anchor: middle;
+}
