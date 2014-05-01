@@ -10,46 +10,27 @@ globalstrict:true, nomen:false, newcap:false */
 
 "use strict";
 
+var savedData;
+var savedChart;
 
 function draw(data) {
   console.log("Got data!", data);
-  var chart = d3.select('.chart');
+  var chart = d3.select('.chart')
+    .chart('BarChart', {
+      transform: function(data) {
+        console.log("data", data);
+        return data.map(function(d) {
+          return { name : d.ProductVersion, value : d.Total };
+        });
+      }
+    }).yFormat(d3.format("s"))
+    .height(100)
+    .width(150);
 
-  var xScale = d3.scale.linear()
-                 .domain([0, data.length])
-                 .range([0, 150]);
+  savedChart = chart;
 
-  var yScale = d3.scale.log()
-                 .domain([1, d3.max(data)])
-                 .range([0, 100]);
-
-  console.log("x,y", data.length, d3.max(data));
-
-
-  chart.selectAll('.tiles')
-    .data(data)
-    .enter()
-    // <rect x="0" y="0" width="50" height="50" fill="green" />
-    .append('rect')
-      .attr('class', 'bar')
-      .style('fill', function (d) {
-        return 'rgba(255,0,0,' + (yScale(d)/100) + ')';
-        // return 'rgb(255,0,0)';
-      }).attr({
-        'x': function (d, i) {
-          return xScale(i);
-        },
-        'y': function (d) {
-          return 100 - yScale(d);
-        },
-        'width': function () {
-          return xScale(1);
-        },
-        'height': function (d) {
-          console.log("y:", d, yScale(d));
-          return yScale(d);
-        }
-      });
+  // render it with some data
+  chart.draw(data);
 }
 
 var ds = new Miso.Dataset({
@@ -57,12 +38,10 @@ var ds = new Miso.Dataset({
   delimiter : ","
 });
 
-var savedData;
-
 ds.fetch().then(function (data) {
-  savedData = data.column('Total').data;
+  savedData = data;
   console.log(data.columnNames());
   console.log(data.length);
-  draw(data.column('Total').data);
+  draw(data.toJSON().slice(0, 10));
 })
-draw(ds);
+
