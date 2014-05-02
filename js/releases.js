@@ -72,8 +72,8 @@ function draw(data) {
 }
 
 var ds = new Miso.Dataset({
-  url : "../releases.csv",
-  delimiter : ","
+  url: 'releases.csv',
+  delimiter: ','
 });
 
 var version;
