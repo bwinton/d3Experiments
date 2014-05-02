@@ -10,45 +10,71 @@ globalstrict:true, nomen:false, newcap:false */
 
 "use strict";
 
+var yScales = {};
+var yScale;
+var chart;
+
+function updateHeights () {
+  var chart = d3.select('.chart');
+  console.log("Running!!!", chart.selectAll('.bar'));
+  chart.selectAll('.bar').transition().attr({
+    'y': function (d) {
+      return yScale(d.Total);
+    },
+    'height': function (d) {
+      return 90 - yScale(d.Total);
+    }
+  }).duration(500);
+}
+
 function draw(data) {
   var chart = d3.select('.chart');
 
   console.log("Length:", data.length);
   console.log("Map:", data.map((d) => d.ProductVersion));
   var xScale = d3.scale.linear()
-                 .domain([0, data.length])
-                 .range([0, 150]);
+    .domain([0, data.length])
+    .range([0, 150]);
 
   var yMax = d3.max(data.map((d) => d.Total));
-  var yScale = d3.scale.log()
-                 .domain([1, yMax])
-                 .range([90, 0]);
-  yScale.tickFormat(5, 's');
+
+  yScales['yLog'] = d3.scale.log()
+    .domain([1, yMax])
+    .range([90, 0]);
+  yScales['yLog'].tickFormat(5, 's');
+
+  yScales['yLinear'] = d3.scale.linear()
+    .domain([1, yMax])
+    .range([90, 0]);
+  yScales['yLinear'].tickFormat(5, 's');
+
+  yScale = yScales['yLog'];
+
   var s = d3.format('0.2s');
 
   chart.append('g').attr({'id': 'bars'})
-    .selectAll('.bars').data(data).enter()
-    // <rect x="0" y="0" width="50" height="50" fill="green" />
+    .selectAll('.bar').data(data).enter()
     .append('rect')
-      .attr('class', 'bar')
-      .style('fill', function (d) {
-        return 'rgba(255,0,0,' + ((90 - yScale(d.Total))/90) + ')';
-      }).attr({
-        'x': function (d, i) {
-          return xScale(i);
-        },
-        'y': function (d) {
-          return yScale(d.Total);
-        },
-        'width': function () {
-          return xScale(1);
-        },
-        'height': function (d) {
-          return 90 - yScale(d.Total);
-        }
-      }).append("svg:title")
-      .text((d) => d.ProductVersion + '/' + d.Percentage + '/' + s(d.Total));
+    .attr('class', 'bar')
+    .style('fill', function (d) {
+      return 'rgba(255,0,0,' + ((90 - yScale(d.Total))/90) + ')';
+    }).attr({
+      'x': function (d, i) {
+        return xScale(i);
+      },
+      'y': function (d) {
+        return 90;
+      },
+      'width': function () {
+        return xScale(1);
+      },
+      'height': function (d) {
+        return 0;
+      }
+    }).append("svg:title")
+    .text((d) => d.ProductVersion + '/' + d.Percentage + '/' + s(d.Total));
 
+  setTimeout(updateHeights, 500)
 
   var xAxis = d3.svg.axis()
     .scale(xScale)
@@ -116,3 +142,20 @@ ds.fetch().then(function (data) {
     return 0;
   }).toJSON());
 })
+
+$(function () {
+  $('#btn-linear').click(function () {
+    $('.btn.scale').removeClass('btn-primary');
+    $(this).addClass('btn-primary');
+    yScale = yScales['yLinear'];
+    updateHeights();
+  });
+
+  $('#btn-log').click(function () {
+    $('.btn.scale').removeClass('btn-primary');
+    $(this).addClass('btn-primary');
+    yScale = yScales['yLog'];
+    updateHeights();
+  })
+
+});
