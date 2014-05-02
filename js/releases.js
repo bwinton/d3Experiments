@@ -8,15 +8,64 @@ strict:true, undef:true, unused:true, curly:true, browser:true, white:true,
 moz:true, esnext:false, indent:2, maxerr:50, devel:true, node:true, boss:true,
 globalstrict:true, nomen:false, newcap:false */
 
-"use strict";
+'use strict';
 
+function popularityComparator(rowA, rowB) {
+  if (rowA.Total > rowB.Total) {
+    return -1;
+  }
+  if (rowA.Total < rowB.Total) {
+    return 1;
+  }
+  return 0;
+}
+
+function versionComparator(rowA, rowB) {
+  var aVersion = /(\d+)(?:\.(\d+))?(?:\.(\d+))?(?:\.(\d+))?/.exec(rowA.ProductVersion);
+  if (aVersion) {
+    aVersion = aVersion.slice(1).map((d) => new Number(d));
+  }
+  var bVersion = /(\d+)(?:\.(\d+))?(?:\.(\d+))?(?:\.(\d+))?/.exec(rowB.ProductVersion);
+  if (bVersion) {
+    bVersion = bVersion.slice(1).map((d) => new Number(d));
+  }
+
+  if (aVersion === null && bVersion !== null) {
+    return 1;
+  } else if (aVersion !== null && bVersion === null) {
+    return -1
+  }
+
+  if (aVersion[0] > bVersion[0]) {
+    return -1;
+  }
+  if (aVersion[0] < bVersion[0]) {
+    return 1;
+  }
+  if (aVersion[1] > bVersion[1]) {
+    return -1;
+  }
+  if (aVersion[1] < bVersion[1]) {
+    return 1;
+  }
+  if (aVersion[2] > bVersion[2]) {
+    return -1;
+  }
+  if (aVersion[2] < bVersion[2]) {
+    return 1;
+  }
+  return 0;
+}
+
+
+var chart;
+var xOrder = 'VersionOrder';
+var xScale;
 var yScales = {};
 var yScale;
-var chart;
 
 function updateHeights () {
   var chart = d3.select('.chart');
-  console.log("Running!!!", chart.selectAll('.bar'));
   chart.selectAll('.bar').transition().attr({
     'y': function (d) {
       return yScale(d.Total);
@@ -27,12 +76,20 @@ function updateHeights () {
   }).duration(500);
 }
 
+function updateXes () {
+  var chart = d3.select('.chart');
+  chart.selectAll('.bar').transition().attr({
+    'x': function (d) {
+      return xScale(d[xOrder]);
+    }
+  }).duration(500);
+}
 function draw(data) {
   var chart = d3.select('.chart');
 
   console.log("Length:", data.length);
   console.log("Map:", data.map((d) => d.ProductVersion));
-  var xScale = d3.scale.linear()
+  xScale = d3.scale.linear()
     .domain([0, data.length])
     .range([0, 150]);
 
@@ -59,8 +116,8 @@ function draw(data) {
     .style('fill', function (d) {
       return 'rgba(255,0,0,' + ((90 - yScale(d.Total))/90) + ')';
     }).attr({
-      'x': function (d, i) {
-        return xScale(i);
+      'x': function (d) {
+        return xScale(d[xOrder]);
       },
       'y': function (d) {
         return 90;
@@ -71,7 +128,7 @@ function draw(data) {
       'height': function (d) {
         return 0;
       }
-    }).append("svg:title")
+    }).append('svg:title')
     .text((d) => d.ProductVersion + '/' + d.Percentage + '/' + s(d.Total));
 
   setTimeout(updateHeights, 500)
@@ -82,7 +139,7 @@ function draw(data) {
     .tickSize(1)
     .tickFormat((x) => data[x].ProductVersion)
     .ticks(10);
-  chart.append("g")
+  chart.append('g')
     .attr('class', 'x axis')
     .attr('transform', 'translate(0,90)')
     .call(xAxis);
@@ -105,42 +162,22 @@ var ds = new Miso.Dataset({
 var version;
 
 ds.fetch().then(function (data) {
-  draw(data.sort(function (rowA, rowB) {
-    var aVersion = /(\d+)(?:\.(\d+))?(?:\.(\d+))?(?:\.(\d+))?/.exec(rowA.ProductVersion);
-    if (aVersion) {
-      aVersion = aVersion.slice(1).map((d) => new Number(d));
-    }
-    var bVersion = /(\d+)(?:\.(\d+))?(?:\.(\d+))?(?:\.(\d+))?/.exec(rowB.ProductVersion);
-    if (bVersion) {
-      bVersion = bVersion.slice(1).map((d) => new Number(d));
-    }
 
-    if (aVersion === null && bVersion !== null) {
-      return 1;
-    } else if (aVersion !== null && bVersion === null) {
-      return -1
-    }
+  data.sort(popularityComparator);
+  data.addColumn({
+    type: 'number',
+    name: 'PopularityOrder',
+    data: _.range(data.length)
+  });
 
-    if (aVersion[0] > bVersion[0]) {
-      return -1;
-    }
-    if (aVersion[0] < bVersion[0]) {
-      return 1;
-    }
-    if (aVersion[1] > bVersion[1]) {
-      return -1;
-    }
-    if (aVersion[1] < bVersion[1]) {
-      return 1;
-    }
-    if (aVersion[2] > bVersion[2]) {
-      return -1;
-    }
-    if (aVersion[2] < bVersion[2]) {
-      return 1;
-    }
-    return 0;
-  }).toJSON());
+  data.sort(versionComparator);
+  data.addColumn({
+    type: 'number',
+    name: 'VersionOrder',
+    data: _.range(data.length)
+  });
+
+  draw(data.toJSON());
 })
 
 $(function () {
@@ -156,6 +193,19 @@ $(function () {
     $(this).addClass('btn-primary');
     yScale = yScales['yLog'];
     updateHeights();
-  })
+  });
 
+  $('#btn-version').click(function () {
+    $('.btn.order').removeClass('btn-primary');
+    $(this).addClass('btn-primary');
+    xOrder = 'VersionOrder';
+    updateXes();
+  });
+
+  $('#btn-popularity').click(function () {
+    $('.btn.order').removeClass('btn-primary');
+    $(this).addClass('btn-primary');
+    xOrder = 'PopularityOrder';
+    updateXes();
+  });
 });

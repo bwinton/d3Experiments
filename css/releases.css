@@ -30,6 +30,6 @@ line {
   shape-rendering: crispEdges;
 }
 
-.btn.scale {
+.btn {
   transition: color 1s, background-color 1s, border-color 1s;
 }
