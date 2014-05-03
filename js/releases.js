@@ -67,22 +67,18 @@ var yScale;
 function updateHeights () {
   var chart = d3.select('.chart');
   chart.selectAll('.bar').transition().attr({
-    'y': function (d) {
-      return yScale(d.Total);
-    },
-    'height': function (d) {
-      return 90 - yScale(d.Total);
-    }
-  }).duration(500);
+    'y': d => yScale(d.Total),
+    'height': d => 90 - yScale(d.Total)
+  }).duration(500)
+  .delay((d,i) => 5 * i);
 }
 
 function updateXes () {
   var chart = d3.select('.chart');
   chart.selectAll('.bar').transition().attr({
-    'x': function (d) {
-      return xScale(d[xOrder]);
-    }
-  }).duration(500);
+    'x': d => xScale(d[xOrder])
+  }).duration(500)
+  .delay((d,i) => 5 * i);
 }
 function draw(data) {
   var chart = d3.select('.chart');
