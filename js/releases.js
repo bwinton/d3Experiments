@@ -70,7 +70,7 @@ function updateHeights () {
     'y': d => yScale(d.Total),
     'height': d => 90 - yScale(d.Total)
   }).duration(500)
-  .delay((d,i) => 5 * i);
+  .delay(d => 5 * d[xOrder]);
 }
 
 function updateXes () {
@@ -78,7 +78,7 @@ function updateXes () {
   chart.selectAll('.bar').transition().attr({
     'x': d => xScale(d[xOrder])
   }).duration(500)
-  .delay((d,i) => 5 * i);
+  .delay(d => 5 * d[xOrder]);
 }
 function draw(data) {
   var chart = d3.select('.chart');
