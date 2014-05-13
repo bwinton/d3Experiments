@@ -23,7 +23,38 @@ var widgets = {
   'tileN': {'x': 95.4, 'y': 85, 'width': 35.3, 'height': 10},
 };
 
+var ids = ['tile1', 'tile2', 'tile3', 'tile4', 'tile5', 'tile6', 'tile7', 'tile8', 'tile9', 'tileN'];
+var newData = {
+  'reversed': {
+    'count': 25777,
+    'total': [16816, 12117, 8829, 7242, 6591, 5961, 2930, 2850, 3365, 1041]
+  },
+  'default': {
+    'count': 1217655,
+    'total': [1019821, 674379, 458698, 327849, 298166, 230958, 148179, 133924, 121596, 77406]
+  }
+};
 
+function parse(data) {
+  var totals = data['total'];
+  var sum = d3.sum(totals);
+  return totals.map((v, i) => ({'id': ids[i], 'value': v/sum}));
+}
+
+var parsedData = [
+  {'id': 'tile1', 'value': 31.2},
+  {'id': 'tile2', 'value': 18.1},
+  {'id': 'tile3', 'value': 12.3},
+  {'id': 'tile4', 'value': 8.9},
+  {'id': 'tile5', 'value': 8.4},
+  {'id': 'tile6', 'value': 6.3},
+  {'id': 'tile7', 'value': 4.8},
+  {'id': 'tile8', 'value': 4.5},
+  {'id': 'tile9', 'value': 4.1},
+  {'id': 'tileN', 'value': 1.6}
+];
+
+var percent = d3.format('0.1%');
 
 function draw(data) {
   var chart = d3.select('.chart');
@@ -36,12 +67,9 @@ function draw(data) {
   chart.selectAll('.tiles')
     .data(data)
     .enter()
-    // <rect x="0" y="0" width="50" height="50" fill="green" />
     .append('rect')
-      .attr('class', 'bar')
-      .style('fill', function (d) {
-        return 'rgba(255,0,0,' + (d.value/100) + ')';
-      }).attr({
+      .attr({
+        'class': 'bar',
         'x': function (d) {
           return widgets[d.id].x;
         },
@@ -55,11 +83,12 @@ function draw(data) {
           return widgets[d.id].height;
         }
       });
-    chart.selectAll('label')
+    chart.selectAll('.label')
       .data(data)
       .enter()
       .append('text')
       .attr({
+        'class': 'label',
         'x': function (d) {
           return widgets[d.id].x + widgets[d.id].width / 2;
         },
@@ -72,23 +101,37 @@ function draw(data) {
         },
         'height': function (d) {
           return widgets[d.id].height;
-        },
-        'class': 'label'
-      }).text(function (d) {
-        return d.value + '%';
+        }
       });
+    update(data);
 }
 
-var data = [
-  {'id': 'tile1', 'value': 31.2},
-  {'id': 'tile2', 'value': 18.1},
-  {'id': 'tile3', 'value': 12.3},
-  {'id': 'tile4', 'value': 8.9},
-  {'id': 'tile5', 'value': 8.4},
-  {'id': 'tile6', 'value': 6.3},
-  {'id': 'tile7', 'value': 4.8},
-  {'id': 'tile8', 'value': 4.5},
-  {'id': 'tile9', 'value': 4.1},
-  {'id': 'tileN', 'value': 1.6}
-];
-draw(data);
+function update(data) {
+  var chart = d3.select('.chart');
+  chart.selectAll('.bar').data(data).transition()
+    .style('fill', function (d) {
+      return 'rgba(255,0,0,' + (d.value) + ')';
+    }).duration(500);
+  chart.selectAll('.label').data(data).transition()
+    .text(function (d) {
+      return percent(d.value);
+    }).duration(500);
+}
+
+
+$(function () {
+  $('#btn-default').click(function () {
+    $('.btn.order').removeClass('btn-primary');
+    $(this).addClass('btn-primary');
+    update(parse(newData['default']));
+  });
+
+  $('#btn-reversed').click(function () {
+    $('.btn.order').removeClass('btn-primary');
+    $(this).addClass('btn-primary');
+    update(parse(newData['reversed']));
+  });
+});
+
+parsedData = parse(newData['default']);
+draw(parsedData);
