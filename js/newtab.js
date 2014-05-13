@@ -11,16 +11,16 @@ globalstrict:true, nomen:false, newcap:false */
 "use strict";
 
 var widgets = {
-  'tile1': {'x': 19.4, 'y': 22.7, 'width': 35.3, 'height': 18.2},
-  'tile2': {'x': 57.4, 'y': 22.7, 'width': 35.3, 'height': 18.2},
-  'tile3': {'x': 95.4, 'y': 22.7, 'width': 35.3, 'height': 18.2},
-  'tile4': {'x': 19.4, 'y': 43.7, 'width': 35.3, 'height': 18.2},
-  'tile5': {'x': 57.4, 'y': 43.7, 'width': 35.3, 'height': 18.2},
-  'tile6': {'x': 95.4, 'y': 43.7, 'width': 35.3, 'height': 18.2},
-  'tile7': {'x': 19.4, 'y': 64.7, 'width': 35.3, 'height': 18.2},
-  'tile8': {'x': 57.4, 'y': 64.7, 'width': 35.3, 'height': 18.2},
-  'tile9': {'x': 95.4, 'y': 64.7, 'width': 35.3, 'height': 18.2},
-  'tileN': {'x': 95.4, 'y': 85, 'width': 35.3, 'height': 10},
+  'tile1': {'x': 298, 'y': 350, 'width': 547, 'height': 283},
+  'tile2': {'x': 885, 'y': 350, 'width': 547, 'height': 283},
+  'tile3': {'x': 1471, 'y': 350, 'width': 547, 'height': 283},
+  'tile4': {'x': 298, 'y': 674, 'width': 547, 'height': 283},
+  'tile5': {'x': 885, 'y': 674, 'width': 547, 'height': 283},
+  'tile6': {'x': 1471, 'y': 674, 'width': 547, 'height': 283},
+  'tile7': {'x': 298, 'y': 997, 'width': 547, 'height': 283},
+  'tile8': {'x': 885, 'y': 997, 'width': 547, 'height': 283},
+  'tile9': {'x': 1471, 'y': 997, 'width': 547, 'height': 283},
+  'tileN': {'x': 1471, 'y': 1320, 'width': 547, 'height': 141},
 };
 
 var ids = ['tile1', 'tile2', 'tile3', 'tile4', 'tile5', 'tile6', 'tile7', 'tile8', 'tile9', 'tileN'];
@@ -61,7 +61,7 @@ function draw(data) {
 
   var image = d3.select('.chart').append('image');
   image.attr({
-    'x': 0, 'y': 0, 'width': 150, 'height': 100, 'xlink:href': 'EmptyFirefox.png'
+    'x': 0, 'y': 0, 'width': 2316, 'height': 1544, 'xlink:href': 'EmptyFirefox.png'
   });
 
   chart.selectAll('.tiles')
@@ -70,6 +70,7 @@ function draw(data) {
     .append('rect')
       .attr({
         'class': 'bar',
+        'fill':'rgba(255,0,0,0)',
         'x': function (d) {
           return widgets[d.id].x;
         },
