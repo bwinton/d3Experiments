@@ -8,6 +8,8 @@ strict:true, undef:true, unused:true, curly:true, browser:true, white:true,
 moz:true, esnext:false, indent:2, maxerr:50, devel:true, node:true, boss:true,
 globalstrict:true, nomen:false, newcap:false */
 
+/*global d3:false, $:false, _:false, Miso:false */
+
 'use strict';
 
 function popularityComparator(rowA, rowB) {
@@ -23,17 +25,17 @@ function popularityComparator(rowA, rowB) {
 function versionComparator(rowA, rowB) {
   var aVersion = /(\d+)(?:\.(\d+))?(?:\.(\d+))?(?:\.(\d+))?/.exec(rowA.ProductVersion);
   if (aVersion) {
-    aVersion = aVersion.slice(1).map((d) => new Number(d));
+    aVersion = aVersion.slice(1).map((d) => +d);
   }
   var bVersion = /(\d+)(?:\.(\d+))?(?:\.(\d+))?(?:\.(\d+))?/.exec(rowB.ProductVersion);
   if (bVersion) {
-    bVersion = bVersion.slice(1).map((d) => new Number(d));
+    bVersion = bVersion.slice(1).map((d) => +d);
   }
 
   if (aVersion === null && bVersion !== null) {
     return 1;
   } else if (aVersion !== null && bVersion === null) {
-    return -1
+    return -1;
   }
 
   if (aVersion[0] > bVersion[0]) {
@@ -58,7 +60,6 @@ function versionComparator(rowA, rowB) {
 }
 
 
-var chart;
 var xOrder = 'VersionOrder';
 var xScale;
 var yScales = {};
@@ -83,25 +84,23 @@ function updateXes () {
 function draw(data) {
   var chart = d3.select('.chart');
 
-  console.log("Length:", data.length);
-  console.log("Map:", data.map((d) => d.ProductVersion));
   xScale = d3.scale.linear()
     .domain([0, data.length])
     .range([0, 150]);
 
   var yMax = d3.max(data.map((d) => d.Total));
 
-  yScales['yLog'] = d3.scale.log()
+  yScales.yLog = d3.scale.log()
     .domain([1, yMax])
     .range([90, 0]);
-  yScales['yLog'].tickFormat(5, 's');
+  yScales.yLog.tickFormat(5, 's');
 
-  yScales['yLinear'] = d3.scale.linear()
+  yScales.yLinear = d3.scale.linear()
     .domain([1, yMax])
     .range([90, 0]);
-  yScales['yLinear'].tickFormat(5, 's');
+  yScales.yLinear.tickFormat(5, 's');
 
-  yScale = yScales['yLog'];
+  yScale = yScales.yLog;
 
   var s = d3.format('0.2s');
 
@@ -115,19 +114,19 @@ function draw(data) {
       'x': function (d) {
         return xScale(d[xOrder]);
       },
-      'y': function (d) {
+      'y': function () {
         return 90;
       },
       'width': function () {
         return xScale(1);
       },
-      'height': function (d) {
+      'height': function () {
         return 0;
       }
     }).append('svg:title')
     .text((d) => d.ProductVersion + '/' + d.Percentage + '/' + s(d.Total));
 
-  setTimeout(updateHeights, 500)
+  setTimeout(updateHeights, 500);
 
   var xAxis = d3.svg.axis()
     .scale(xScale)
@@ -155,8 +154,6 @@ var ds = new Miso.Dataset({
   delimiter: ','
 });
 
-var version;
-
 ds.fetch().then(function (data) {
 
   data.sort(popularityComparator);
@@ -174,20 +171,20 @@ ds.fetch().then(function (data) {
   });
 
   draw(data.toJSON());
-})
+});
 
 $(function () {
   $('#btn-linear').click(function () {
     $('.btn.scale').removeClass('btn-primary');
     $(this).addClass('btn-primary');
-    yScale = yScales['yLinear'];
+    yScale = yScales.yLinear;
     updateHeights();
   });
 
   $('#btn-log').click(function () {
     $('.btn.scale').removeClass('btn-primary');
     $(this).addClass('btn-primary');
-    yScale = yScales['yLog'];
+    yScale = yScales.yLog;
     updateHeights();
   });
 

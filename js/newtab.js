@@ -8,7 +8,9 @@ strict:true, undef:true, unused:true, curly:true, browser:true, white:true,
 moz:true, esnext:false, indent:2, maxerr:50, devel:true, node:true, boss:true,
 globalstrict:true, nomen:false, newcap:false */
 
-"use strict";
+/*global d3:false, $:false */
+
+'use strict';
 
 var widgets = {
   'tile1': {'x': 298, 'y': 350, 'width': 547, 'height': 283},
@@ -40,7 +42,7 @@ var newData = {
 };
 
 function parse(data) {
-  var totals = data['total'];
+  var totals = data.total;
   var sum = d3.sum(totals);
   return totals.map((v, i) => ({'id': ids[i], 'value': v/sum}));
 }
@@ -121,7 +123,7 @@ $(function () {
   $('#btn-reversed').click(function () {
     $('.btn.order').removeClass('btn-primary');
     $(this).addClass('btn-primary');
-    update(parse(newData['reversed']));
+    update(parse(newData.reversed));
   });
 });
 
