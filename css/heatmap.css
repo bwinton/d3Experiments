@@ -1,0 +1,15 @@
+.chart {
+  height: 95vh;
+  width: 95vw;
+  margin: 0;
+}
+
+.label {
+  font-size: 50px;
+  fill: #333;
+  text-anchor: middle;
+}
+
+.btn.order {
+  transition: color 1s, background-color 1s, border-color 1s;
+}
