@@ -104,66 +104,85 @@ var ds = new Miso.Dataset({
 
 var widgets = {};
 var allControls = [
+  // buttons people clicked in post:
   'add-ons-button',
   'alltabs-button',
   'back-button',
-  'BMB_bookmarksPopup',
-  'BMB_bookmarksToolbarPopup',
-  'BMB_unsortedBookmarksPopup',
   'bookmarks-menu-button',
+  'characterencoding-button',
   'copy-button',
   'cut-button',
   'developer-button',
   'downloads-button',
-  // 'edit-controls',
   'email-link-button',
   'feed-button',
   'find-button',
-  // 'forward-button',
+  'forward-button',
   'fullscreen-button',
-  'history-panelmenu',
   'home-button',
-  // 'menubar-items',
-  'nav-bar',
+  'menu-button-button',
   'new-tab-button',
   'new-window-button',
   'open-file-button',
-  // 'PanelUI-contents',
-  'PanelUI-menu-button',
   'paste-button',
-  'personal-bookmarks',
-  // 'PersonalToolbar',
-  'PlacesChevron',
-  'PlacesToolbarItems',
   'preferences-button',
   'print-button',
   'privatebrowsing-button',
   'save-page-button',
-  'search-container',
-  'searchbar',
   'social-share-button',
   'sync-button',
-  // 'tabbrowser-tabs',
-  // 'TabsToolbar',
+  'tabsclose-button',
   'tabview-button',
-  'toolbar-menubar',
-  'urlbar-container',
   'urlbar-go-button',
   'urlbar-reload-button',
   'urlbar-stop-button',
   'webrtc-status-button',
-  'zoom-controls',
   'zoom-in-button',
   'zoom-out-button',
-  'zoom-reset-button'
+  'zoom-reset-button',
+
+  // buttons no-one's clicked on.
+  'e10s-button',
+  'sidebar-button',
+
+  // Other things people click on.
+
+  
+  // 'BMB_bookmarksPopup',
+  // 'BMB_bookmarksToolbarPopup',
+  // 'BMB_unsortedBookmarksPopup',
+  // 'bookmarks-bar-chevron',
+  // 'bookmarks-bar-container',
+  // 'bookmarks-bar-item',
+  // 'bookmarks-bar-overflowed-item',
+  // 'edit-controls',
+  'history-panelmenu',
+  // 'menubar-items',
+  // 'menubar-menu',
+  // 'menubar-menuitem',
+  // 'menubar-other',
+  // 'nav-bar',
+  // 'PanelUI-contents',
+  'PanelUI-menu-button',
+  // 'personal-bookmarks',
+  // 'PersonalToolbar',
+  // 'PlacesChevron',
+  // 'PlacesToolbarItems',
+  'searchbar',
+  // 'search-container',
+  // 'tabbrowser-tabs',
+  // 'TabsToolbar',
+  // 'toolbar-menubar',
+  // 'urlbar-container',
+  // 'zoom-controls'
 ];
+
 // var allControls = ['add-ons-button', 'alltabs-button', 'back-button', 'email-link-button'];
 ds.fetch().then(function (data) {
-  data.remove(d => {
-    return d.width === 0;
-  });
   data.each(d => {
-    widgets[d.id] = d;
+    if (d.width !== 0) {
+      widgets[d.id] = d;
+    }
   });
   draw(allControls);
 });
