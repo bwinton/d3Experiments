@@ -4,10 +4,9 @@
   margin: 0;
 }
 
-.label {
-  font-size: 50px;
-  fill: #333;
-  text-anchor: middle;
+.bar {
+  stroke: #333333;
+  stroke-width: 1px;
 }
 
 .btn.order {

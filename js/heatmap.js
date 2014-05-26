@@ -26,7 +26,7 @@ function draw(data) {
     'x': 0, 'y': 0, 'width': 3012, 'height': 1984, 'xlink:href': 'Heatmap.png'
   });
 
-  chart.selectAll('.tiles')
+  chart.selectAll('.bar')
     .data(data)
     .enter()
     .append('rect')
@@ -44,26 +44,9 @@ function draw(data) {
         },
         'height': function (d) {
           return widgets[d].height * scale;
-        }
-      });
-    chart.selectAll('.label')
-      .data(data)
-      .enter()
-      .append('text')
-      .attr({
-        'class': 'label',
-        'x': function (d) {
-          return widgets[d].x + widgets[d].width / 2;
         },
-        'y': function (d) {
-          return widgets[d].y + widgets[d].height / 2;
-        },
-        'dy': '0.5em',
-        'width': function (d) {
-          return widgets[d].width;
-        },
-        'height': function (d) {
-          return widgets[d].height;
+        'title': function (d) {
+          return d.replace('-button', '').replace('-', ' ');
         }
       });
     update(data);
@@ -74,11 +57,6 @@ function update(data) {
   chart.selectAll('.bar').data(data).transition()
     .style('fill', function () {
       return 'rgba(255,0,0,0.5)';
-    }).duration(500);
-  chart.selectAll('.label').data(data).transition()
-    .text(function (d) {
-      // return d;
-      return '';
     }).duration(500);
 }
 
@@ -146,8 +124,6 @@ var allControls = [
   'sidebar-button',
 
   // Other things people click on.
-
-  
   // 'BMB_bookmarksPopup',
   // 'BMB_bookmarksToolbarPopup',
   // 'BMB_unsortedBookmarksPopup',
@@ -155,26 +131,29 @@ var allControls = [
   // 'bookmarks-bar-container',
   // 'bookmarks-bar-item',
   // 'bookmarks-bar-overflowed-item',
-  // 'edit-controls',
   'history-panelmenu',
   // 'menubar-items',
   // 'menubar-menu',
   // 'menubar-menuitem',
   // 'menubar-other',
-  // 'nav-bar',
-  // 'PanelUI-contents',
   'PanelUI-menu-button',
-  // 'personal-bookmarks',
-  // 'PersonalToolbar',
+  'personal-bookmarks',
   // 'PlacesChevron',
   // 'PlacesToolbarItems',
   'searchbar',
-  // 'search-container',
   // 'tabbrowser-tabs',
-  // 'TabsToolbar',
   // 'toolbar-menubar',
+
+  // Containers.
+  // 'edit-controls',
+  // 'nav-bar',
+  // 'PanelUI-contents',
+  // 'PersonalToolbar',
+  // 'search-container',
+  // 'TabsToolbar',
   // 'urlbar-container',
   // 'zoom-controls'
+
 ];
 
 // var allControls = ['add-ons-button', 'alltabs-button', 'back-button', 'email-link-button'];

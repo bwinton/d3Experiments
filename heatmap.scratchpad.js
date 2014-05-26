@@ -68,10 +68,35 @@ var elements = [
   'toolbar-menubar',
   'urlbar-container',
   'zoom-controls'
-
 ];
 
+// Get the browser into the right mode.
+const STATE_START = Ci.nsIWebProgressListener.STATE_START;
+const STATE_STOP = Ci.nsIWebProgressListener.STATE_STOP;
+var myListener = {
+    QueryInterface: XPCOMUtils.generateQI(['nsIWebProgressListener',
+                                           'nsISupportsWeakReference']),
+    onLocationChange: function(aProgress, aRequest, aURI) {
+      if (aURI.spec === 'about:customizing') {
+        setTimeout(function () {
+          window.content.location = 'about:config';
+        }, 1000);
+      } else if (aURI.spec === 'about:config') {
+        setTimeout(function () {
+          gBrowser.removeProgressListener(myListener);
+          window.content.back();
+        }, 1000);
+      }
+      return true;
+    }
+};
+
+// Get the browser into the right mode.
+gBrowser.addProgressListener(myListener);
+window.content.location = 'about:customizing';
+
 var locs = 'id,x,y,width,height\n';
+
 elements.forEach(i => {
   let element = document.getElementById(i);
   if (element) {
@@ -81,5 +106,4 @@ elements.forEach(i => {
     locs += i + ',-1,-1,0,0\n';
   }
 });
-
-locs
+console.log(locs);
