@@ -156,7 +156,6 @@ var allControls = [
 
 ];
 
-// var allControls = ['add-ons-button', 'alltabs-button', 'back-button', 'email-link-button'];
 ds.fetch().then(function (data) {
   data.each(d => {
     if (d.width !== 0) {
