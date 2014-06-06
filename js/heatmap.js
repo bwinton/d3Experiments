@@ -12,19 +12,27 @@ globalstrict:true, nomen:false, newcap:false */
 
 'use strict';
 
-// var percent = d3.format('0.1%');
+var clickFormat = d3.format('0.2');
 var scale = 2;
 var xOffset = 114;
 var yOffset = 70;
 
 function draw(data) {
-  data = _.filter(data, d => _.has(widgets, d));
-  var chart = d3.select('.chart');
+  // Choose the elements we want to draw.
+  data = _.filter(data, row => {
+    return (
+      row.sys_info === 'Darwin' &&
+      row.item === 'click' &&
+      _.has(widgets, row.widget));
+  });
 
+  // Set up the image.
+  var chart = d3.select('.chart');
   var image = d3.select('.chart').append('image');
   image.attr({
     'x': 0, 'y': 0, 'width': 3012, 'height': 1984, 'xlink:href': 'Heatmap.png'
   });
+
 
   chart.selectAll('.bar')
     .data(data)
@@ -32,31 +40,38 @@ function draw(data) {
     .append('rect')
       .attr({
         'class': 'bar',
-        'fill':'rgba(255,0,0,0)',
+        'fill': 'rgba(255,0,0,0)',
         'x': function (d) {
-          return widgets[d].x * scale + xOffset;
+          return widgets[d.widget].x * scale + xOffset;
         },
         'y': function (d) {
-          return widgets[d].y * scale + yOffset;
+          return widgets[d.widget].y * scale + yOffset;
         },
         'width': function (d) {
-          return widgets[d].width * scale;
+          return widgets[d.widget].width * scale;
         },
         'height': function (d) {
-          return widgets[d].height * scale;
+          return widgets[d.widget].height * scale;
         },
         'title': function (d) {
-          return d.replace('-button', '').replace('-', ' ');
+          return d.widget.replace('-button', '').replace('-', ' ') +
+            ' - ' + clickFormat(d.instances_per_session) + ' clicks per session';
         }
       });
     update(data);
 }
 
 function update(data) {
+  // Set up the scales.
+  var maxClicks = d3.max(data, d => d.instances_per_session);
+  var clickScale = d3.scale.log()
+    .domain([1, maxClicks])
+    .range(['rgba(255,0,0,0.1)', 'rgba(255,0,0,0.5)']);
+
   var chart = d3.select('.chart');
   chart.selectAll('.bar').data(data).transition()
-    .style('fill', function () {
-      return 'rgba(255,0,0,0.5)';
+    .style('fill', function (d) {
+      return clickScale(d.instances_per_session);
     }).duration(500);
 }
 
@@ -75,10 +90,16 @@ $(function () {
   });
 });
 
-var ds = new Miso.Dataset({
+var widgetDS = new Miso.Dataset({
   url: 'heatmap.csv',
   delimiter: ','
 });
+
+var clicksDS = new Miso.Dataset({
+  url: 'heatmap_data.csv',
+  delimiter: ','
+});
+
 
 var widgets = {};
 var allControls = [
@@ -156,11 +177,20 @@ var allControls = [
 
 ];
 
-ds.fetch().then(function (data) {
-  data.each(d => {
+_.when.apply(null, [widgetDS.fetch(), clicksDS.fetch()]).done(function () {
+  // console.log(widgetDS, clicksDS);
+  widgetDS.each(d => {
     if (d.width !== 0) {
       widgets[d.id] = d;
     }
   });
-  draw(allControls);
+  var clicks = [];
+  clicksDS.each(row => {
+    var d = row;
+    d.widget = d.subitem
+      .replace('builtin-item-', '')
+      .replace('-left', '');
+    clicks.push(d);
+  });
+  draw(clicks);
 });
