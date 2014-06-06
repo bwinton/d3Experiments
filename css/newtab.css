@@ -5,9 +5,18 @@
 }
 
 .label {
+  transition: fill 250ms;
   font-size: 50px;
   fill: #333;
   text-anchor: middle;
+}
+
+.label.increasing {
+  fill: #083;
+}
+
+.label.decreasing {
+  fill: #B33;
 }
 
 .btn.order {

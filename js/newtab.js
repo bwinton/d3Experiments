@@ -106,10 +106,25 @@ function update(data) {
     .style('fill', function (d) {
       return 'rgba(255,0,0,' + (d.value) + ')';
     }).duration(500);
-  chart.selectAll('.label').data(data).transition()
-    .text(function (d) {
-      return percent(d.value);
-    }).duration(500);
+  chart.selectAll('.label').data(data)
+    .classed('increasing', function (d) {
+      var currentValue = this.textContent.slice(0,-1);
+      currentValue = +currentValue / 100;
+      return d.value >= currentValue;
+    }).classed('decreasing', function (d) {
+      var currentValue = this.textContent.slice(0,-1);
+      currentValue = +currentValue / 100;
+      return d.value < currentValue;
+    }).transition().tween('text', function (d) {
+      var currentValue = this.textContent.slice(0,-1);
+      currentValue = +currentValue / 100;
+      var interpolator = d3.interpolateNumber(currentValue, d.value);
+      return function( t ) {
+        this.textContent = percent(interpolator(t));
+      };
+    }).duration(500).each('end', function () {
+      d3.select(this).classed('increasing decreasing', false);
+    });
 }
 
 
