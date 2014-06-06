@@ -1,4 +1,4 @@
-sys_info,item,subitem,avg. instances per session,pct sessions with occurrence
+sys_info,item,subitem,instances_per_session,sessions_with_occurrence
 WINNT,bookmarksBarEnabled,True,120.6667,120.6667
 WINNT,bookmarksBarEnabled,False,99.6667,99.6667
 WINNT,addonToolbars,0,204.6667,204.6667
