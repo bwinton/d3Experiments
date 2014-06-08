@@ -8,7 +8,7 @@ strict:true, undef:true, unused:true, curly:true, browser:true, white:true,
 moz:true, esnext:false, indent:2, maxerr:50, devel:true, node:true, boss:true,
 globalstrict:true, nomen:false, newcap:false */
 
-/*global d3:false, $:false, _:false, Miso:false */
+/*global d3:false, $:false */
 
 'use strict';
 
@@ -19,11 +19,11 @@ var yOffset = 70;
 
 function draw(data) {
   // Choose the elements we want to draw.
-  data = _.filter(data, row => {
+  data = data.filter(row => {
     return (
       row.sys_info === 'Darwin' &&
       row.item === 'click' &&
-      _.has(widgets, row.widget));
+      widgets[row.widget]);
   });
 
   // Set up the image.
@@ -88,16 +88,6 @@ $(function () {
     $(this).addClass('btn-primary');
     update(allControls);
   });
-});
-
-var widgetDS = new Miso.Dataset({
-  url: 'heatmap.csv',
-  delimiter: ','
-});
-
-var clicksDS = new Miso.Dataset({
-  url: 'heatmap_data.csv',
-  delimiter: ','
 });
 
 
@@ -177,20 +167,22 @@ var allControls = [
 
 ];
 
-_.when.apply(null, [widgetDS.fetch(), clicksDS.fetch()]).done(function () {
-  // console.log(widgetDS, clicksDS);
-  widgetDS.each(d => {
-    if (d.width !== 0) {
-      widgets[d.id] = d;
-    }
+$.when(d3.csvPromise('heatmap.csv'), d3.csvPromise('heatmap_data.csv'))
+  .then(function (widget_data, click_data) {
+    $.each(widget_data, (i, d) => {
+      if (d.width !== 0) {
+        widgets[d.id] = d;
+      }
+    });
+    var clicks = [];
+    $.each(click_data, (i, row) => {
+      var d = row;
+      d.widget = d.subitem
+        .replace('builtin-item-', '')
+        .replace('-left', '');
+      clicks.push(d);
+    });
+    draw(clicks);
+  }).fail(function (error) {
+    console.log('Fail', error);
   });
-  var clicks = [];
-  clicksDS.each(row => {
-    var d = row;
-    d.widget = d.subitem
-      .replace('builtin-item-', '')
-      .replace('-left', '');
-    clicks.push(d);
-  });
-  draw(clicks);
-});
