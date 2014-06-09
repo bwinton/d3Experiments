@@ -1,4 +1,14 @@
-// Elements.
+/*! This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+
+/*jshint forin:true, noarg:true, noempty:true, eqeqeq:true, bitwise:true,
+strict:true, undef:true, unused:true, curly:true, browser:true, white:true,
+moz:true, esnext:false, indent:2, maxerr:50, devel:true, node:true, boss:true,
+globalstrict:true, nomen:false, newcap:false */
+
+/*global gNavToolbox:false, console:false */
 
 'use strict';
 
@@ -69,15 +79,19 @@ var elements = [
   'zoom-reset-button'
 ];
 
+var translations = {
+  'menu-button-button': 'PanelUI-menu-button'
+};
+
 // Get the browser into the right mode.
-gNavToolbox.addEventListener("customizationready", function UI_loaded() {
+gNavToolbox.addEventListener('customizationready', function UI_loaded() {
   document.getElementById('forward-button').disabled = false;
   
   setTimeout(function () {
     var locs = 'id,x,y,width,height\n';
 
     elements.forEach(i => {
-      let element = document.getElementById(i);
+      let element = document.getElementById(translations[i] || i);
       if (element) {
         let bounds = element.getBoundingClientRect();
         locs += i + ',' + bounds.x + ',' + bounds.y + ',' + bounds.width + ',' + bounds.height + '\n';
@@ -87,7 +101,7 @@ gNavToolbox.addEventListener("customizationready", function UI_loaded() {
     });
     console.log(locs);
   }, 1000);
-  gNavToolbox.removeEventListener("customizationready", UI_loaded);
+  gNavToolbox.removeEventListener('customizationready', UI_loaded);
 });
 
 window.content.location = 'about:customizing';
