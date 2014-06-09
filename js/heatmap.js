@@ -64,7 +64,7 @@ function draw(data) {
 function update(data) {
   // Set up the scales.
   var maxClicks = d3.max(data, d => d.instances_per_session);
-  var clickScale = d3.scale.log()
+  var clickScale = d3.scale.pow()
     .domain([1, maxClicks])
     .range(['rgba(255,0,0,0.1)', 'rgba(255,0,0,0.5)']);
 
