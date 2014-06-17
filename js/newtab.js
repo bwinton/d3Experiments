@@ -54,7 +54,7 @@ function draw(data) {
 
   var image = d3.select('.chart').append('image');
   image.attr({
-    'x': 0, 'y': 0, 'width': 2316, 'height': 1544, 'xlink:href': 'EmptyFirefox.png'
+    'x': 0, 'y': 0, 'width': 2316, 'height': 1544, 'xlink:href': 'images/EmptyFirefox.png'
   });
 
   chart.selectAll('.tiles')

@@ -30,7 +30,8 @@ function draw(data) {
   var chart = d3.select('.chart');
   var image = d3.select('.chart').append('image');
   image.attr({
-    'x': 0, 'y': 0, 'width': 3012, 'height': 1984, 'xlink:href': 'Heatmap.png'
+    'x': 0, 'y': 0, 'width': 3012, 'height': 1984,
+    'xlink:href': 'images/HeatmapCustomize.png'
   });
 
 
@@ -80,101 +81,27 @@ $(function () {
   $('#btn-default').click(function () {
     $('.btn.order').removeClass('btn-primary');
     $(this).addClass('btn-primary');
-    update(allControls);
+    update(clicks);
   });
 
   $('#btn-reversed').click(function () {
     $('.btn.order').removeClass('btn-primary');
     $(this).addClass('btn-primary');
-    update(allControls);
+    update(clicks);
   });
 });
 
 
 var widgets = {};
-var allControls = [
-  // buttons people clicked in post:
-  'add-ons-button',
-  'alltabs-button',
-  'back-button',
-  'bookmarks-menu-button',
-  'characterencoding-button',
-  'copy-button',
-  'cut-button',
-  'developer-button',
-  'downloads-button',
-  'email-link-button',
-  'feed-button',
-  'find-button',
-  'forward-button',
-  'fullscreen-button',
-  'home-button',
-  'menu-button-button',
-  'new-tab-button',
-  'new-window-button',
-  'open-file-button',
-  'paste-button',
-  'preferences-button',
-  'print-button',
-  'privatebrowsing-button',
-  'save-page-button',
-  'social-share-button',
-  'sync-button',
-  'tabsclose-button',
-  'tabview-button',
-  'urlbar-go-button',
-  'urlbar-reload-button',
-  'urlbar-stop-button',
-  'webrtc-status-button',
-  'zoom-in-button',
-  'zoom-out-button',
-  'zoom-reset-button',
+var clicks = [];
 
-  // buttons no-one's clicked on.
-  'e10s-button',
-  'sidebar-button',
-
-  // Other things people click on.
-  // 'BMB_bookmarksPopup',
-  // 'BMB_bookmarksToolbarPopup',
-  // 'BMB_unsortedBookmarksPopup',
-  // 'bookmarks-bar-chevron',
-  // 'bookmarks-bar-container',
-  // 'bookmarks-bar-item',
-  // 'bookmarks-bar-overflowed-item',
-  'history-panelmenu',
-  // 'menubar-items',
-  // 'menubar-menu',
-  // 'menubar-menuitem',
-  // 'menubar-other',
-  'PanelUI-menu-button',
-  'personal-bookmarks',
-  // 'PlacesChevron',
-  // 'PlacesToolbarItems',
-  'searchbar',
-  // 'tabbrowser-tabs',
-  // 'toolbar-menubar',
-
-  // Containers.
-  // 'edit-controls',
-  // 'nav-bar',
-  // 'PanelUI-contents',
-  // 'PersonalToolbar',
-  // 'search-container',
-  // 'TabsToolbar',
-  // 'urlbar-container',
-  // 'zoom-controls'
-
-];
-
-$.when(d3.csvPromise('heatmap.csv'), d3.csvPromise('heatmap_data.csv'))
+$.when(d3.csvPromise('heatmap.csv'), d3.csvPromise('https://people.mozilla.org/~bwinton/heatmap_data/0.csv'))
   .then(function (widget_data, click_data) {
     $.each(widget_data, (i, d) => {
       if (d.width !== 0) {
         widgets[d.id] = d;
       }
     });
-    var clicks = [];
     $.each(click_data, (i, row) => {
       var d = row;
       d.widget = d.subitem
