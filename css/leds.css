@@ -1,0 +1,15 @@
+body {
+  padding: 5vw;
+}
+
+.display {
+  height: 23vw;
+  width: 90vw;
+  border: 2px solid gray;
+  background-color: black;
+}
+
+line {
+  stroke: black;
+  stroke-width: 0.1;
+}
