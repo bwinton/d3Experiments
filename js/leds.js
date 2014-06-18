@@ -64,7 +64,24 @@ function getColours () {
   return data;
 }
 
-draw(getColours());
+function updateColours (data) {
+  d3.range(8).map(
+    (d, i) => {
+      data[i].shift();
+      var x = Math.floor(Math.random() * 40);
+      var colour = 'black';
+      if (x < 20) {
+        colour = colours(x);
+      }
+      data[i].push(colour);
+    }
+  );
+  return data;
+}
+
+var data = getColours();
+draw(data);
 setInterval(function () {
-  update(getColours());
-}, 1000);
+  data = updateColours(data);
+  update(data);
+}, 750);
