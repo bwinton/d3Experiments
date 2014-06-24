@@ -26,11 +26,18 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
       <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
     <![endif]-->
 
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header navbar-text">Platform:</div>
+        <ul class="nav navbar-nav">
+          <li><a id="Windows" href="#">Windows</a></li>
+          <li class="active"><a id="Mac" href="#">Mac</a></li>
+          <li><a id="Linux" href="#">Linux</a></li>
+        </ul>
+      </div>
+    </nav>
     <div class="main wrapper clearfix">
-      <a id="btn-default" class="btn order btn-primary" href="#" role="button">Default Tile Order</a>
-      <a id="btn-reversed" class="btn order" href="#" role="button">Reversed Tile Order</a>
-
-      <svg viewBox="0 0 3012 1984" class="chart">
+      <svg class="chart">
       <!-- svg viewBox="0 0 150 100" class="chart" -->
       </svg>
     </div> <!-- #main -->

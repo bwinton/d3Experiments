@@ -13,9 +13,10 @@ globalstrict:true, nomen:false, newcap:false */
 'use strict';
 
 var clickFormat = d3.format('0.2');
+var platform = 'Darwin';
 var scale = 2;
-var xOffset = 114;
-var yOffset = 70;
+var WIDTH = 1492;
+var HEIGHT = 1128;
 
 function draw(data) {
   // Choose the elements we want to draw.
@@ -28,10 +29,11 @@ function draw(data) {
 
   // Set up the image.
   var chart = d3.select('.chart');
+  chart.attr('viewBox', '0 0 ' + WIDTH + ' ' + HEIGHT);
   var image = d3.select('.chart').append('image');
   image.attr({
-    'x': 0, 'y': 0, 'width': 3012, 'height': 1984,
-    'xlink:href': 'images/HeatmapCustomize.png'
+    'x': 0, 'y': 0, 'width': WIDTH, 'height': HEIGHT,
+    'xlink:href': 'images/' + platform + '/HeatmapDefaultPlus.png'
   });
 
 
@@ -43,10 +45,10 @@ function draw(data) {
         'class': 'bar',
         'fill': 'rgba(255,0,0,0)',
         'x': function (d) {
-          return widgets[d.widget].x * scale + xOffset;
+          return widgets[d.widget].x * scale;
         },
         'y': function (d) {
-          return widgets[d.widget].y * scale + yOffset;
+          return widgets[d.widget].y * scale;
         },
         'width': function (d) {
           return widgets[d.widget].width * scale;
@@ -95,7 +97,7 @@ $(function () {
 var widgets = {};
 var clicks = [];
 
-$.when(d3.csvPromise('heatmap.csv'), d3.csvPromise('https://people.mozilla.org/~bwinton/heatmap_data/0.csv'))
+$.when(d3.csvPromise('data/' + platform + '/widgets.csv'), d3.csvPromise('https://people.mozilla.org/~bwinton/heatmap_data/0.csv'))
   .then(function (widget_data, click_data) {
     $.each(widget_data, (i, d) => {
       if (d.width !== 0) {
