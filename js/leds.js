@@ -51,14 +51,7 @@ var colours = d3.scale.category20().domain(d3.range(20));
 function getColours () {
   var data = d3.range(8).map(
     () => d3.range(32).map(
-      () => {
-        var x = Math.floor(Math.random() * 40);
-        if (x >= 20) {
-          return 'black';
-        } else {
-          return colours(x);
-        }
-      }
+      () => 'black'
     )
   );
   return data;
@@ -68,20 +61,93 @@ function updateColours (data) {
   d3.range(8).map(
     (d, i) => {
       data[i].shift();
-      var x = Math.floor(Math.random() * 40);
       var colour = 'black';
-      if (x < 20) {
-        colour = colours(x);
+      if (currentShape) {
+        var shapeData = shapes.get(currentShape);
+        if (currentIndex >= 0 && currentIndex < shapeData[i].length) {
+          colour = shapeData[i][currentIndex];
+        }
+        if (currentIndex > shapeData[i].length + 1) {
+          currentShape = null;
+          currentIndex = 0;
+        }
+      } else {
+        var x = Math.floor(Math.random() * 40);
+        if (x < 20) {
+          colour = colours(x);
+        }
+        if (currentIndex > 20 && Math.random() > 0.7) {
+          // Pick a new shape.
+          var shapeKeys = shapes.keys();
+          currentShape = shapeKeys[Math.floor(Math.random() * shapeKeys.length)];
+          currentIndex = -3;
+        }
       }
       data[i].push(colour);
     }
   );
+  currentIndex++;
   return data;
 }
 
 var data = getColours();
+var currentShape = null;
+var currentIndex = -32;
 draw(data);
 setInterval(function () {
   data = updateColours(data);
   update(data);
 }, 750);
+
+var shapes = d3.map({
+  'mail': [
+    ['red',   'red', 'white', 'white', 'white', 'white',   'red', 'red'],
+    ['red',   'red',   'red', 'white', 'white',   'red',   'red', 'red'],
+    ['red', 'white',   'red',   'red',   'red',   'red', 'white', 'red'],
+    ['red', 'white', 'white',   'red',   'red', 'white', 'white', 'red'],
+    ['red', 'white', 'white', 'white', 'white', 'white', 'white', 'red'],
+    ['red', 'white', 'white', 'white', 'white', 'white', 'white', 'red'],
+    ['red', 'white', 'white', 'white', 'white', 'white', 'white', 'red'],
+    ['red', 'white', 'white', 'white', 'white', 'white', 'white', 'red']
+  ],
+  'graph': [
+    ['black', 'black',  'black',  'black', 'black', 'black', 'green', 'green'],
+    ['black', 'black',  'black',  'black', 'black', 'black', 'green', 'green'],
+    ['black', 'black',  'black',  'black',   'red',   'red', 'green', 'green'],
+    ['black', 'black',  'black',  'black',   'red',   'red', 'green', 'green'],
+    ['black', 'black', 'yellow', 'yellow',   'red',   'red', 'green', 'green'],
+    [ 'blue',  'blue', 'yellow', 'yellow',   'red',   'red', 'green', 'green'],
+    [ 'blue',  'blue', 'yellow', 'yellow',   'red',   'red', 'green', 'green'],
+    [ 'blue',  'blue', 'yellow', 'yellow',   'red',   'red', 'green', 'green']
+  ],
+  'cloudsun': [
+    [ 'black',  'black',  'white',  'black',  'black',  'white', 'black',  'black'],
+    [ 'black',  'black',  'black',  'black',  'black',  'black', 'black',  'black'],
+    ['yellow',  'black', 'yellow', 'yellow', 'yellow', 'yellow', 'black', 'yellow'],
+    [ 'black', 'yellow', 'yellow', 'yellow', 'yellow',  'white', 'white',  'black'],
+    [ 'black',  'white',  'white', 'yellow',  'white',  'white', 'white',  'white'],
+    [ 'white',  'white',  'white', 'yellow',  'white',  'white', 'white',  'white'],
+    [ 'white',  'white',  'white',  'white',  'white',  'white', 'white',  'white'],
+    [ 'black',  'white',  'white',  'white',  'white',  'white', 'white',  'black']
+  ],
+  'sun': [
+    ['blue',   'blue',   'blue',   'blue',   'blue',   'blue',   'blue', 'blue', ],
+    ['blue',   'blue',   'blue', 'yellow', 'yellow',   'blue',   'blue', 'blue', ],
+    ['blue',   'blue', 'yellow', 'yellow', 'yellow', 'yellow',   'blue', 'blue', ],
+    ['blue', 'yellow', 'yellow', 'yellow', 'yellow', 'yellow', 'yellow', 'blue', ],
+    ['blue', 'yellow', 'yellow', 'yellow', 'yellow', 'yellow', 'yellow', 'blue', ],
+    ['blue',   'blue', 'yellow', 'yellow', 'yellow', 'yellow',   'blue', 'blue', ],
+    ['blue',   'blue',   'blue', 'yellow', 'yellow',   'blue',   'blue', 'blue', ],
+    ['blue',   'blue',   'blue',   'blue',   'blue',   'blue',   'blue', 'blue', ]
+  ],
+  'empty': [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    []
+  ],
+});
