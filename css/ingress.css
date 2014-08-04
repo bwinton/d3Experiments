@@ -1,0 +1,26 @@
+body {
+  padding: 5vw;
+}
+
+.display {
+  height: 60vw;
+  width: 90vw;
+  border: 2px solid gray;
+}
+
+line {
+  stroke: black;
+  stroke-width: 0.1;
+}
+
+.name {
+  font-weight: bold;
+}
+
+.badges {
+  margin-left: 20px;
+}
+
+#charts svg {
+  vertical-align: middle;
+}

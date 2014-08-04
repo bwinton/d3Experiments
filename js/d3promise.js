@@ -24,4 +24,16 @@ globalstrict:true, nomen:false, newcap:false */
     });
     return promise;
   };
+
+  d3.jsonPromise = function (url) {
+    var promise = $.Deferred();
+    d3.json(url).get(function (error, data) {
+      if (data) {
+        promise.resolve(data);
+      } else {
+        promise.reject(error);
+      }
+    });
+    return promise;
+  };
 })();
