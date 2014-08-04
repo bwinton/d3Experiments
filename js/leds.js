@@ -140,6 +140,16 @@ var shapes = d3.map({
     ['blue',   'blue',   'blue', 'yellow', 'yellow',   'blue',   'blue', 'blue', ],
     ['blue',   'blue',   'blue',   'blue',   'blue',   'blue',   'blue', 'blue', ]
   ],
+  'mario': [
+    [  'black',   'black', '#FC282B', '#FC282B', '#FC282B', '#FC282B', '#FC282B',   'black',   'black',   'black',   'black'],
+    [  'black', '#FC282B', '#FC282B', '#FC282B', '#FC282B', '#FC282B', '#FC282B', '#FC282B', '#FC282B', '#FC282B',   'black'],
+    [  'black', '#7B7F20', '#7B7F20', '#7B7F20', '#FDB32B', '#FDB32B', '#7B7F20', '#FDB32B',   'black',   'black',   'black'],
+    ['#7B7F20', '#FDB32B', '#7B7F20', '#FDB32B', '#FDB32B', '#FDB32B', '#7B7F20', '#FDB32B', '#FDB32B', '#FDB32B',   'black'],
+    ['#7B7F20', '#FDB32B', '#7B7F20', '#7B7F20', '#FDB32B', '#FDB32B', '#FDB32B', '#7B7F20', '#FDB32B', '#FDB32B', '#FDB32B'],
+    ['#7B7F20', '#7B7F20', '#FDB32B', '#FDB32B', '#FDB32B', '#FDB32B', '#7B7F20', '#7B7F20', '#7B7F20', '#7B7F20',   'black'],
+    [  'black',   'black', '#FDB32B', '#FDB32B', '#FDB32B', '#FDB32B', '#FDB32B',   'black',   'black',   'black',   'black'],
+    [  'black', '#7B7F20', '#7B7F20', '#FC282B', '#7B7F20', '#7B7F20', '#7B7F20',   'black',   'black',   'black',   'black']
+  ],
   'empty': [
     [],
     [],
