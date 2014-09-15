@@ -18,7 +18,15 @@ now = datetime.datetime.now(); sec_since_epoch = int(time.mktime(now.timetuple()
 
 var date = d3.time.format('%c');
 var percent = d3.format('0.1%');
-var number = d3.format('01,.3s');
+var number = function (d) {
+  if (d > 99) {
+    d = d3.format('01,.3s')(d)
+  }
+  return '' + d;
+}
+
+var colours = d3.scale.category20();
+
 
 function addScales(metadata) {
   var scales = {};
@@ -26,7 +34,7 @@ function addScales(metadata) {
   $.each(metadata.badges, (key, value) => {
     scales[key] = d3.scale.linear().domain([0, value[top]]);
   });
-  
+
   var ap = $.map(metadata.ap, (v,k) => v);
   scales.ap = d3.scale.linear().domain([0, d3.max(ap)]);
   metadata.scales = scales;
@@ -66,6 +74,16 @@ function getBadges(metadata, agent) {
   return rv
 }
 
+function getBackground (d) {
+  var stop = percent(d.value / d.target);
+  var colour = colours(d.id);
+  var background = '#eee';
+  var rv = 'linear-gradient( 90deg, ' +
+    colour + ', ' + colour + ' ' + stop +
+    ', ' + background + ' ' + stop + ', ' + background + ' )';
+  return rv;
+}
+
 function formatBadge(d) {
   return d.next + ' ' + d.title + ': ' +
     number(d.target - d.value) + '/' + number(d.target) + ' to go.  (' + percent(d.value / d.target) + ')';
@@ -82,6 +100,8 @@ function showLatest(metadata, agents) {
     .text((d) => date(new Date(+d.date)))
     .selectAll('div.iBadge').data((d) => getBadges(metadata, d)).enter()
       .append('div').classed('iBadge', true)
+        .style('background', (d) => getBackground(d))
+        .style('border', (d) => '1px solid ' + colours(d.id))
         .text((d) => formatBadge(d));
 }
 
@@ -100,6 +120,7 @@ function ingress() {
   var area = d3.svg.area().x(X).y1(Y);
   var line = d3.svg.line().x(X).y(Y);
   var fill = '#000000';
+  var breakpoints = [];
 
   function chart(selection) {
     selection.each(function(data) {
@@ -117,8 +138,17 @@ function ingress() {
       // Update the y-scale.
       var yExtent = d3.extent(data, d => d[1]);
       var yRange = (yExtent[1] - yExtent[0]) || (yExtent[0] / 3);
+      var yPrevious = breakpoints.filter(d => d < yExtent[0]);
+      var yNext = breakpoints.filter(d => d > yExtent[1]);
+      // console.log(yExtent, yPrevious, yNext);
+      yPrevious = (yPrevious[yPrevious.length - 1] || 0) - yRange / 3;
+      yNext = (yNext[0] || 0) + yRange / 3;
+      console.log(yExtent, yPrevious, yNext);
+
       yScale
-          .domain([d3.max([0, yExtent[0] - yRange/3]), yExtent[1]])
+          // .domain([d3.max([0, yExtent[0] - yRange/3]), yExtent[1]])
+          // .domain([yPrevious, yNext])
+          .domain([0, yNext])
           .range([height - margin.top - margin.bottom, 0]);
 
       if (yExtent[0] === 0 && yExtent[1] === 0) {
@@ -131,8 +161,19 @@ function ingress() {
 
       // Otherwise, create the skeletal chart.
       var gEnter = svg.enter().append('svg').append('g');
-      gEnter.append('path').attr('class', 'area').attr('fill', fill);
-      gEnter.append('path').attr('class', 'line').attr('fill', fill);
+      gEnter.append('g').attr('class', 'breakpoints').selectAll('line')
+        .data(breakpoints.filter(y => y >= yScale.domain()[0] && y <= yScale.domain()[1]))
+        .enter().append('line')
+          .attr('fill', '#eee')
+          .attr('stroke-width', 2)
+          .attr('x1', 0).attr('y1', yScale)
+          .attr('x2', width).attr('y2', yScale)
+      gEnter.append('path').attr('class', 'area')
+        .attr('fill', fill);
+      gEnter.append('path').attr('class', 'line')
+        .attr('fill', 'rgba(127, 127, 127, 0)')
+        .attr('stroke', d3.rgb(fill).darker(1))
+        .attr('stroke-width', 2);
       gEnter.append('g').attr('class', 'x axis');
       gEnter.append('g').attr('class', 'y axis');
 
@@ -150,6 +191,10 @@ function ingress() {
 
       // Update the line path.
       g.select('.line')
+        .attr('d', line);
+
+      // Update the line path.
+      g.select('.breakpoints')
         .attr('d', line);
 
       // Update the x-axis.
@@ -209,26 +254,37 @@ function ingress() {
     return chart;
   };
 
+  chart.breakpoints = function(_) {
+    if (!arguments.length) return breakpoints;
+    breakpoints = _;
+    return chart;
+  };
+
   return chart;
 }
 
 function draw(metadata, agents) {
 
   charts = $('#charts > div');
-  console.log(charts.length);
-  var colours = d3.scale.category20();
 
   charts.each((i,e) => {
 
     var badgeId = $(e).attr('class');
-    console.log(badgeId);
+    var badge = metadata.badges[badgeId];
+    var levels = metadata.levels
+    if (!badge) {
+      badge = metadata.ap;
+      levels = d3.range(1, 16).map(x => "Level " + x);
+    }
+    levels = levels.map(d => badge[d]);
+    window.data = {levels: levels, badgeId: badgeId, badge: badge};
+
     var chart = ingress()
       .x(d => +d.date)
       .y(d => +d[badgeId])
-      .fill(colours(i));
+      .fill(colours(badgeId))
+      .breakpoints(levels);
 
-    var badge = metadata.badges[badgeId];
-    console.log(badgeId, badge ? badge.title : 'AP');
     d3.select(e)
       .datum(agents[0].data)
       .call(chart)
