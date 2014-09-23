@@ -13,7 +13,7 @@ globalstrict:true, nomen:false, newcap:false */
 'use strict';
 
 /* To get the timestamp, use:
-now = datetime.datetime.now(); sec_since_epoch = int(time.mktime(now.timetuple()) + now.microsecond/1000000.0)*1000; sec_since_epoch
+import datetime,time;now = datetime.datetime.now(); sec_since_epoch = int(time.mktime(now.timetuple()) + now.microsecond/1000000.0)*1000; sec_since_epoch
 */
 
 var date = d3.time.format('%c');
