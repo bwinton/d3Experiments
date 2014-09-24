@@ -49,12 +49,13 @@ function draw(clicks) {
   var menu = d3.select('.menus').selectAll('.menu')
     .data(data);
   menu.enter().append('div').classed('menu col-sm-4', true)
+    .append('div').classed('menubox', true)
     .append('h3')
     .text(function (d) {
       return d.title;
     });
 
-  var item = menu.selectAll('.item')
+  var item = menu.select('.menubox').selectAll('.item')
     .data(d => d.items);
   item.enter().append('div').classed('item', true)
     .text(d => d.item + ' (' + d.clicks + ' clicks)')
@@ -78,13 +79,14 @@ function update(clicks) {
   var menu = d3.select('.menus').selectAll('.menu')
     .data(data);
   menu.enter().append('div').classed('menu col-sm-4', true)
+    .append('div').classed('menubox', true)
     .append('h3')
     .text(function (d) {
       return d.title;
     });
   menu.exit().remove();
 
-  var item = menu.selectAll('.item')
+  var item = menu.select('.menubox').selectAll('.item')
     .data(d => d.items);
   item.enter().append('div').classed('item', true)
     .style({'height': '0px', 'opacity': '0'})
