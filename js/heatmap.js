@@ -99,11 +99,25 @@ var clicks = [];
 
 $.when(d3.csvPromise('data/' + platform + '/widgets.csv'), d3.csvPromise('https://people.mozilla.org/~bwinton/heatmap_data/0.csv'))
   .then(function (widget_data, click_data) {
+    var groups = {
+      'additional': [],
+      'tabs-and-tools': [],
+      'menu-panel': []
+    }
     $.each(widget_data, (i, d) => {
       if (d.width !== 0) {
+        var type = 'additional';
+        if (d.y < 60) {
+          type = 'tabs-and-tools';
+        } else if (d.x > 450) {
+          type = 'menu-panel';
+        }
         widgets[d.id] = d;
+        widgets[d.id].type = type;
+        groups[type].push(d.id);
       }
     });
+    console.log(JSON.stringify(groups));
     $.each(click_data, (i, row) => {
       var d = row;
       d.widget = d.subitem
