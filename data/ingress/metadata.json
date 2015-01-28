@@ -1,18 +1,20 @@
 {"levels": ["Bronze", "Silver", "Gold", "Black", "Platinum"],
  "badgeList": ["ap", "distinctHack", "hacked", "deployed", "links", "fields",
-  "recharged", "captured", "distinctCap", "destroyed", "held", "submitted"],
+  "recharged", "captured", "distinctCap", "destroyed", "held", "submitted", "distance", "mods"],
  "badges": {
   "distinctHack": {"title": "Explorer", "Bronze": 100, "Silver": 1000, "Gold": 2000, "Black": 10000, "Platinum": 30000},
   "hacked": {"title": "Hacker", "Bronze": 2000, "Silver": 10000, "Gold": 30000, "Black": 100000, "Platinum": 200000},
   "deployed": {"title": "Builder", "Bronze": 2000, "Silver": 10000, "Gold": 30000, "Black": 100000, "Platinum": 200000},
   "links": {"title": "Connector", "Bronze": 50, "Silver": 1000, "Gold": 5000, "Black": 25000, "Platinum": 100000},
   "fields": {"title": "MindController", "Bronze": 100, "Silver": 500, "Gold": 2000, "Black": 10000, "Platinum": 40000},
- "recharged": {"title": "Recharger", "Bronze": 100000, "Silver": 1000000, "Gold": 3000000, "Black": 10000000, "Platinum":  25000000},
+  "recharged": {"title": "Recharger", "Bronze": 100000, "Silver": 1000000, "Gold": 3000000, "Black": 10000000, "Platinum":  25000000},
   "captured": {"title": "Liberator", "Bronze": 100, "Silver": 1000, "Gold": 5000, "Black": 15000, "Platinum": 40000},
   "distinctCap": {"title": "Pioneer", "Bronze": 20, "Silver": 200, "Gold": 1000, "Black": 5000, "Platinum": 20000},
   "destroyed": {"title": "Purifier", "Bronze": 2000, "Silver": 10000, "Gold": 30000, "Black": 100000, "Platinum": 300000},
   "held": {"title": "Guardian", "Bronze": 3, "Silver": 10, "Gold": 20, "Black": 90, "Platinum": 150},
-  "submitted": {"title": "Seer", "Bronze": 10, "Silver": 50, "Gold": 200, "Black": 500, "Platinum": 5000}
+  "submitted": {"title": "Seer", "Bronze": 10, "Silver": 50, "Gold": 200, "Black": 500, "Platinum": 5000},
+  "distance": {"title": "Trekker", "Bronze": 10, "Silver": 100, "Gold": 300, "Black": 1000, "Platinum": 2500},
+  "mods": {"title": "Engineer", "Bronze": 150, "Silver": 1500, "Gold": 5000, "Black": 20000, "Platinum": 50000}
  },
  "ap": {
   "Level 1": 0,

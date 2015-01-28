@@ -71,7 +71,12 @@ function getBadges(metadata, agent) {
     }
     return rv;
   });
-  return rv
+  rv = rv.sort((a, b) => (b.value / b.target) - (a.value / a.target));
+  var apIndex = rv.findIndex((d) => (d.id === 'ap'));
+  var ap = rv[apIndex];
+  rv.splice(apIndex, 1);
+  rv.unshift(ap);
+  return rv;
 }
 
 function getBackground (d) {
