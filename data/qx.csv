@@ -9,9 +9,10 @@ bugId,status
 980007,unknown
 980090,unknown
 985659,unknown
+986970,fixed
 995758,unknown
 1029761,unknown
-1036929,unknown
+1036929,assigned
 1041514,unknown
 1091592,unknown
 1102710,unknown
@@ -19,9 +20,9 @@ bugId,status
 1111094,unknown
 1111100,unknown
 1111138,submitted
-1111138,unknown
+1111144,fixed
 1111145,unknown
 1117722,unknown
 1119219,posted
-1119219,unknown
 1119873,submitted
+1123294,fixed
