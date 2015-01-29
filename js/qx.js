@@ -19,6 +19,34 @@ globalstrict:true, nomen:false, newcap:false */
       'status=ALL&' +
       'whiteboard=\[qx\]';
 
+  var sortFunc = function (a, b) {
+    var bug_statuses = this;
+    var orderedStatuses = {
+      'unknown': 0,
+      'submitted': 1, 'posted': 1,
+      'assigned': 2, 'fixed': 2
+    };
+    var aStatus = bug_statuses[a.id];
+    var bStatus = bug_statuses[b.id];
+
+    if (!aStatus) {
+      if (!bStatus) {
+        return a.id - b.id
+      }
+      return -1;
+    }
+    if (!bStatus) {
+      return 1;
+    }
+
+    aStatus = orderedStatuses[aStatus];
+    bStatus = orderedStatuses[bStatus];
+    if (aStatus != bStatus) {
+      return aStatus - bStatus;
+    }
+
+    return a.id - b.id
+  }
 
   var getColour = function (status) {
     switch (status) {
@@ -46,7 +74,7 @@ globalstrict:true, nomen:false, newcap:false */
     d3.select('.bugs').select('.loading').remove()
 
     var bugRow = d3.select('.bugs').selectAll('.bug')
-      .data(all_bugs);
+      .data(all_bugs.sort(sortFunc.bind(bug_statuses)));
 
     bugRow.enter().append('div').classed('bug', true)
       .style({'opacity': '0', 'background-color': bug => getColour(bug_statuses[bug.id])})
