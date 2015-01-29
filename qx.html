@@ -17,7 +17,14 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/fonts.css">
-    <link rel="stylesheet" href="css/heatmap.css">
+    <style type="text/css">
+      .loading {
+        margin-top: 3em;
+      }
+      .header {
+        margin-top: 1em;
+      }
+    </style>
 
     <script src="bower_components/modernizr/modernizr.js"></script>
   </head>
@@ -27,10 +34,11 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
     <![endif]-->
 
     <div class="container">
-      <div class='center-block'>
+      <div class="header well">
         <h1>Quality of Experience Bugs</h1>
       </div>
-      <div class="bugs row">
+      <div class="bugs">
+        <h2 class="loading text-center">Loading…</h2>
       </div>
     </div> <!-- #main -->
 

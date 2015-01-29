@@ -43,6 +43,8 @@ globalstrict:true, nomen:false, newcap:false */
   }
 
   var draw = function (all_bugs, bug_statuses) {
+    d3.select('.bugs').select('.loading').remove()
+
     var bugRow = d3.select('.bugs').selectAll('.bug')
       .data(all_bugs);
 
