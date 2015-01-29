@@ -99,6 +99,7 @@ globalstrict:true, nomen:false, newcap:false */
       .data(bugs.sort(sortFunc));
 
     bugRow.enter().append('div').classed('bug', true)
+      .classed('fixed', bug => bug.qx_status === 'fixed')
       .style({'opacity': '0', 'background-color': bug => getColour(bug.qx_status)})
       .attr('title', bug => bug.qx_status);
 
@@ -112,9 +113,9 @@ globalstrict:true, nomen:false, newcap:false */
       .classed('missing', bug => !getSpec(bug))
       .attr('title', bug => getSpec(bug) || 'missing spec');
 
-    bugRow.append('a').text(bug => bug.id)
+    bugRow.append('a').text(bug => bug.id).classed('bugid', true)
       .attr('href', bug => 'https://bugzilla.mozilla.org/show_bug.cgi?id=' + bug.id);
-    bugRow.append('span')
+    bugRow.append('span').classed('summary', true)
       .text(bug => ' - ' + bug.summary + ' (' + getAssignee(bug) + ')');
 
     bugRow.transition().duration(TRANSITION_DURATION)
