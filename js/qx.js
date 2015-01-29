@@ -12,47 +12,63 @@ globalstrict:true, nomen:false, newcap:false */
 
 'use strict';
 
+(function () {
 var TRANSITION_DURATION = 500;
+var BUGZILLA_URL = 'https://api-dev.bugzilla.mozilla.org/latest/bug?' +
+    'include_fields=id,assigned_to,summary,last_change_time,whiteboard,status,resolution&' +
+    'status=ALL&' +
+    'whiteboard=\[qx\]';
 
-var getColour = function (bug) {
-  switch (bug.status) {
+
+var getColour = function (status) {
+  switch (status) {
+    case 'unknown':
+      return 'rgb(255,255,255)';
     case 'submitted':
     case 'posted':
       return 'rgb(127,255,127)';
-    case 'unknown':
-      return 'rgb(255,255,255)';
+    case 'assigned':
+    case 'fixed':
+      return 'rgb(192,214,255)';
     default:
       return 'rgb(255,127,127)';
   }
 };
 
-var draw = function (bugs) {
-  console.log(d3.select('.bugs').selectAll('.bug')[0].length)
+var getAssignee = function (bug) {
+  if (bug.assigned_to && bug.assigned_to.name) {
+    return bug.assigned_to.name;
+  }
+  return 'nobody';
+}
+
+var draw = function (all_bugs, bug_statuses) {
   var bugRow = d3.select('.bugs').selectAll('.bug')
-    .data(bugs);
-  console.log(d3.select('.bugs').selectAll('.bug')[0].length)
+    .data(all_bugs);
 
   bugRow.enter().append('div').classed('bug', true)
-    .style({'opacity': '0', 'background-color': bug => getColour(bug)})
-    .text(bug => bug.bugId + ' (' + bug.status + ')')
+    .style({'opacity': '0', 'background-color': bug => getColour(bug_statuses[bug.id])})
+    .text(bug => bug.id + ' - ' + bug.summary + ' (' + getAssignee(bug) + ')')
+    .attr('title', bug => bug_statuses[bug.id])
     .transition().duration(TRANSITION_DURATION)
     .delay((d, i) => i*20)
     .style({'opacity': '1'});
-  console.log(d3.select('.bugs').selectAll('.bug')[0].length)
 
   bugRow.exit()
     .transition().duration(TRANSITION_DURATION)
     .style({'height': '0px', 'opacity': '0'})
     .remove();
-  console.log(d3.select('.bugs').selectAll('.bug')[0].length)
 };
 
-$.when(d3.csvPromise('data/qx.csv'))
-  .then(function (bug_data) {
+$.when(d3.csvPromise('data/qx.csv'), d3.jsonPromise(BUGZILLA_URL))
+  .then(function (bug_data, more_bug_data) {
+    var all_bugs = more_bug_data.bugs;
+    var bug_statuses = {};
     $.each(bug_data, (i, bug) => {
-      // console.log(bug.bugId,bug.status)
+      bug_statuses[+bug.bugId] = bug.status;
     });
-    draw(bug_data);
+    draw(all_bugs, bug_statuses);
   }).fail(function (error) {
     console.log('Fail', error);
   });
+})();
