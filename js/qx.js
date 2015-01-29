@@ -107,10 +107,10 @@ globalstrict:true, nomen:false, newcap:false */
       .attr('title', bug => getMentor(bug) || 'nobody');
     bugRow.append('span').classed('icon glyphicon glyphicon-search', true)
       .classed('missing', bug => !getDxr(bug))
-      .attr('title', bug => getDxr(bug) || 'missing');
+      .attr('title', bug => getDxr(bug) || 'missing link');
     bugRow.append('span').classed('icon glyphicon glyphicon-picture', true)
       .classed('missing', bug => !getSpec(bug))
-      .attr('title', bug => getSpec(bug) || 'missing');
+      .attr('title', bug => getSpec(bug) || 'missing spec');
 
     bugRow.append('a').text(bug => bug.id)
       .attr('href', bug => 'https://bugzilla.mozilla.org/show_bug.cgi?id=' + bug.id);
