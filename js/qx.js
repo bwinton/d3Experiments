@@ -130,11 +130,9 @@ globalstrict:true, nomen:false, newcap:false */
   $.when(d3.jsonPromise(BUGZILLA_URL), d3.csvPromise('data/qx.csv'))
     .then(function (bug_list, bug_statuses) {
       var bug_list = bug_list.bugs;
-      console.log(bug_list.slice());
       $.each(bug_list, (i, bug) => {
         $.extend(bug, bug_statuses.find(test => +test.id === +bug.id));
       });
-      console.log(bug_list);
       draw(bug_list);
     }).fail(function (error) {
       console.log('Fail', error);
