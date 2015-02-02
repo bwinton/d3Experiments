@@ -14,7 +14,7 @@ globalstrict:true, nomen:false, newcap:false */
 
 (function () {
   var TRANSITION_DURATION = 500;
-  var BUGZILLA_URL = 'https://api-dev.bugzilla.mozilla.org/latest/bug?' +
+  var BUGZILLA_URL = 'https://bugzilla.mozilla.org/rest/bug?' +
       'include_fields=id,assigned_to,summary,last_change_time,whiteboard,status,mentor,resolution&' +
       'status=ALL&' +
       'whiteboard=\[qx\]';
@@ -79,14 +79,14 @@ globalstrict:true, nomen:false, newcap:false */
   }
 
   var getDxr = function (bug) {
-    if (bug.dxr !== 'no') {
+    if (bug.dxr && bug.dxr !== 'no') {
       return 'has link';
     }
     return false;
   }
 
   var getSpec = function (bug) {
-    if (bug.spec !== 'no') {
+    if (bug.spec && bug.spec !== 'no') {
       return 'has spec';
     }
     return false;
