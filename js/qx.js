@@ -15,7 +15,7 @@ globalstrict:true, nomen:false, newcap:false */
 (function () {
   var TRANSITION_DURATION = 500;
   var BUGZILLA_URL = 'https://bugzilla.mozilla.org/rest/bug?' +
-      'include_fields=id,assigned_to,summary,last_change_time,whiteboard,status,mentor,resolution&' +
+      'include_fields=id,assigned_to,summary,last_change_time,whiteboard,status,mentors,resolution&' +
       'status=ALL&' +
       'whiteboard=\[qx\]';
 
@@ -65,15 +65,15 @@ globalstrict:true, nomen:false, newcap:false */
   };
 
   var getAssignee = function (bug) {
-    if (bug.assigned_to && bug.assigned_to.name) {
-      return bug.assigned_to.name;
+    if (bug.assigned_to) {
+      return bug.assigned_to;
     }
     return 'nobody';
   }
 
   var getMentor = function (bug) {
-    if (bug.mentor && bug.mentor.content) {
-      return bug.mentor.content;
+    if (bug.mentors && bug.mentors.length) {
+      return bug.mentors.join(', ');
     }
     return false;
   }
