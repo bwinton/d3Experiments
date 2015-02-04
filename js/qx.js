@@ -19,13 +19,16 @@ globalstrict:true, nomen:false, newcap:false */
       'status=ALL&' +
       'whiteboard=\[qx\]';
 
+  var orderedStatuses = {
+    'unknown': 0,
+    'not_ready': 1, 'needinfo': 1,
+    'submitted': 2, 'posted': 2,
+    'assigned': 3, 'fixed': 3
+  };
+
+  var percent = d3.format('0.1%');
+
   var sortFunc = function (a, b) {
-    var orderedStatuses = {
-      // 'unknown': 0,
-      'not_ready': 1, 'needinfo': 1,
-      'submitted': 2, 'posted': 2,
-      'assigned': 3, 'fixed': 3
-    };
     var aStatus = a.qx_status;
     var bStatus = b.qx_status;
 
@@ -92,6 +95,22 @@ globalstrict:true, nomen:false, newcap:false */
     return false;
   }
 
+  var summarize = function (bugs) {
+
+    var summary = [
+      {name: 'unknown', bugs: []},
+      {name: 'not_ready', bugs: []},
+      {name: 'submitted', bugs: []},
+      {name: 'assigned', bugs: []},
+    ];
+    bugs.forEach(bug => {
+      status = orderedStatuses[bug.qx_status] || 0;
+      summary[status].bugs.push(bug);
+      summary[status].percentage = summary[status].bugs.length / bugs.length;
+    });
+    return summary.filter(category => category.bugs.length);
+  }
+
   var draw = function (bugs) {
     d3.select('.bugs').select('.loading').remove()
 
@@ -126,6 +145,15 @@ globalstrict:true, nomen:false, newcap:false */
       .transition().duration(TRANSITION_DURATION)
       .style({'height': '0px', 'opacity': '0'})
       .remove();
+
+    d3.select('.summaries').selectAll('.category')
+      .data(summarize(bugs))
+      .enter().append('div').classed('category', true)
+      .style({
+        'flex': category => category.bugs.length,
+        'background-color': category => getColour(category.name)
+      }).text(category => category.name + ': ' + category.bugs.length +
+        ' (' + percent(category.percentage) + ')');
   };
 
   $.when(d3.jsonPromise(BUGZILLA_URL), d3.csvPromise('data/qx.csv'))
