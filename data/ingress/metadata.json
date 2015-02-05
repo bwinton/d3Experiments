@@ -1,6 +1,7 @@
 {"levels": ["Bronze", "Silver", "Gold", "Black", "Platinum"],
  "badgeList": ["ap", "distinctHack", "hacked", "deployed", "links", "fields",
-  "recharged", "captured", "distinctCap", "destroyed", "held", "submitted", "distance", "mods"],
+  "recharged", "captured", "distinctCap", "destroyed", "held", "submitted",
+  "distance", "mods", "glyph"],
  "badges": {
   "distinctHack": {"title": "Explorer", "Bronze": 100, "Silver": 1000, "Gold": 2000, "Black": 10000, "Platinum": 30000},
   "hacked": {"title": "Hacker", "Bronze": 2000, "Silver": 10000, "Gold": 30000, "Black": 100000, "Platinum": 200000},
@@ -14,7 +15,8 @@
   "held": {"title": "Guardian", "Bronze": 3, "Silver": 10, "Gold": 20, "Black": 90, "Platinum": 150},
   "submitted": {"title": "Seer", "Bronze": 10, "Silver": 50, "Gold": 200, "Black": 500, "Platinum": 5000},
   "distance": {"title": "Trekker", "Bronze": 10, "Silver": 100, "Gold": 300, "Black": 1000, "Platinum": 2500},
-  "mods": {"title": "Engineer", "Bronze": 150, "Silver": 1500, "Gold": 5000, "Black": 20000, "Platinum": 50000}
+  "mods": {"title": "Engineer", "Bronze": 150, "Silver": 1500, "Gold": 5000, "Black": 20000, "Platinum": 50000},
+  "glyph": {"title": "Translator", "Bronze": 200, "Silver": 2000, "Gold": 6000, "Black": 20000, "Platinum": 50000}
  },
  "ap": {
   "Level 1": 0,
