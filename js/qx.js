@@ -23,7 +23,7 @@ globalstrict:true, nomen:false, newcap:false */
   var orderedStatuses = {
     'unknown': 0,
     'not_ready': 1, 'needinfo': 1,
-    'submitted': 2, 'posted': 2,
+    'submitted': 2,
     'assigned': 3, 'fixed': 3
   };
 
@@ -58,7 +58,6 @@ globalstrict:true, nomen:false, newcap:false */
       case 'needinfo':
         return 'rgb(255,255,255)';
       case 'submitted':
-      case 'posted':
         return 'rgb(127,255,127)';
       case 'assigned':
       case 'fixed':
