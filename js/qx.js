@@ -18,6 +18,7 @@ globalstrict:true, nomen:false, newcap:false */
       'include_fields=id,assigned_to,summary,last_change_time,whiteboard,status,mentors,resolution&' +
       'status=ALL&' +
       'whiteboard=\[qx\]';
+  var START_MOZILLA_URL = 'https://dl.dropboxusercontent.com/u/2301433/Twitter/startmozilla.tweets.txt';
 
   var orderedStatuses = {
     'unknown': 0,
@@ -136,6 +137,9 @@ globalstrict:true, nomen:false, newcap:false */
       .attr('href', bug => 'https://bugzilla.mozilla.org/show_bug.cgi?id=' + bug.id);
     bugRow.append('span').classed('summary', true)
       .text(bug => ' - ' + bug.summary + ' (' + getAssignee(bug) + ')');
+    bugRow.append('a').classed('twitter', true)
+      .attr('href', bug => bug.twitter)
+      .classed('missing', bug => !bug.twitter);
 
     bugRow.transition().duration(TRANSITION_DURATION)
       .delay((d, i) => i*20)
@@ -156,11 +160,27 @@ globalstrict:true, nomen:false, newcap:false */
         ' (' + percent(category.percentage) + ')');
   };
 
-  $.when(d3.jsonPromise(BUGZILLA_URL), d3.csvPromise('data/qx.csv'))
-    .then(function (bug_list, bug_statuses) {
+  $.when(d3.jsonPromise(BUGZILLA_URL),
+           d3.csvPromise('data/qx.csv'),
+           d3.htmlPromise(START_MOZILLA_URL))
+    .then(function (bug_list, bug_statuses, startmozilla) {
       var bug_list = bug_list.bugs;
+
+      var lines = startmozilla.textContent.split('\n');
+      var posts = [];
+      lines = lines.forEach(line => {
+        if (line.startsWith('bug ')) {
+          line = line.split(' - ');
+          posts.push({id: line[0].slice(4), 'twitter': line[1]});
+        } else if (line) {
+          console.log('Error processing "' + line + '".');
+        }
+      });
+
       $.each(bug_list, (i, bug) => {
-        $.extend(bug, bug_statuses.find(test => +test.id === +bug.id));
+        $.extend(bug,
+          bug_statuses.find(test => +test.id === +bug.id),
+          posts.find(test => +test.id === +bug.id));
       });
       draw(bug_list);
     }).fail(function (error) {

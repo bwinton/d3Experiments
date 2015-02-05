@@ -36,4 +36,16 @@ globalstrict:true, nomen:false, newcap:false */
     });
     return promise;
   };
+
+  d3.htmlPromise = function (url) {
+    var promise = $.Deferred();
+    d3.html(url).get(function (error, data) {
+      if (data) {
+        promise.resolve(data);
+      } else {
+        promise.reject(error);
+      }
+    });
+    return promise;
+  };
 })();
