@@ -20,12 +20,12 @@ globalstrict:true, nomen:false, newcap:false */
       'whiteboard=\[qx\]';
   var START_MOZILLA_URL = 'https://dl.dropboxusercontent.com/u/2301433/Twitter/startmozilla.tweets.txt';
 
-  var orderedStatuses = {
-    'unknown': 0,
-    'not_ready': 1, 'needinfo': 1,
-    'submitted': 2,
-    'assigned': 3, 'fixed': 3
-  };
+  var orderedStatuses = new Map([
+    ['unknown', 0],
+    ['not_ready', 1], ['needinfo', 1],
+    ['submitted', 2],
+    ['assigned', 3], ['fixed', 3]
+  ]);
 
   var percent = d3.format('0.1%');
 
@@ -43,8 +43,8 @@ globalstrict:true, nomen:false, newcap:false */
       return 1;
     }
 
-    aStatus = orderedStatuses[aStatus] || 0;
-    bStatus = orderedStatuses[bStatus] || 0;
+    aStatus = orderedStatuses.get(aStatus) || 0;
+    bStatus = orderedStatuses.get(bStatus) || 0;
     if (aStatus != bStatus) {
       return aStatus - bStatus;
     }
@@ -104,7 +104,7 @@ globalstrict:true, nomen:false, newcap:false */
       {name: 'assigned', bugs: []},
     ];
     bugs.forEach(bug => {
-      status = orderedStatuses[bug.qx_status] || 0;
+      status = orderedStatuses.get(bug.qx_status) || 0;
       summary[status].bugs.push(bug);
       summary[status].percentage = summary[status].bugs.length / bugs.length;
     });
