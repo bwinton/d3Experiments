@@ -22,9 +22,10 @@ globalstrict:true, nomen:false, newcap:false */
 
   var orderedStatuses = new Map([
     ['unknown', 0],
-    ['not_ready', 1], ['needinfo', 1],
+    ['not_ready', 1],
     ['submitted', 2],
-    ['assigned', 3], ['fixed', 3]
+    ['assigned', 3],
+    ['fixed', 4]
   ]);
 
   var percent = d3.format('0.1%');
@@ -55,7 +56,6 @@ globalstrict:true, nomen:false, newcap:false */
   var getColour = function (status) {
     switch (status) {
       case 'not_ready':
-      case 'needinfo':
         return 'rgb(255,255,255)';
       case 'submitted':
         return 'rgb(127,255,127)';
@@ -104,7 +104,11 @@ globalstrict:true, nomen:false, newcap:false */
       {name: 'assigned', bugs: []},
     ];
     bugs.forEach(bug => {
-      status = orderedStatuses.get(bug.qx_status) || 0;
+      var status = orderedStatuses.get(bug.qx_status) || 0;
+      // Lump fixed in with assigned.
+      if (status === 4) {
+        status = 3;
+      }
       summary[status].bugs.push(bug);
       summary[status].percentage = summary[status].bugs.length / bugs.length;
     });
@@ -176,10 +180,20 @@ globalstrict:true, nomen:false, newcap:false */
         }
       });
 
+      bug_list.forEach(bug => {
+        if (bug.status === 'RESOLVED') {
+          bug.qx_status = 'fixed';
+        } else if (getAssignee(bug) !== 'nobody@mozilla.org') {
+          bug.qx_status = 'assigned';
+        }
+      });
+
       $.each(bug_list, (i, bug) => {
+        var bug_status = bug.qx_status ? {qx_status: bug.qx_status} : {};
         $.extend(bug,
           bug_statuses.find(test => +test.id === +bug.id),
-          posts.find(test => +test.id === +bug.id));
+          posts.find(test => +test.id === +bug.id),
+          bug_status);
       });
       draw(bug_list);
     }).fail(function (error) {

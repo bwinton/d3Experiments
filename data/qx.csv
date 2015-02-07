@@ -1,5 +1,5 @@
 id,dxr,spec,qx_status
-306730,yes,no,needinfo
+306730,yes,no,not_ready
 613785,no,yes,not_ready
 658467,no,yes,not_ready
 674925,no,yes,not_ready
@@ -10,10 +10,10 @@ id,dxr,spec,qx_status
 980007,yes,yes,submitted
 980090,no,yes,not_ready
 985659,no,no,not_ready
-986970,yes,yes,fixed
+986970,yes,yes,submitted
 995758,no,yes,not_ready
 1029761,no,yes,not_ready
-1036929,no,no,assigned
+1036929,no,no,submitted
 1041514,no,yes,not_ready
 1073234,yes,yes,submitted
 1091592,no,yes,not_ready
@@ -22,9 +22,9 @@ id,dxr,spec,qx_status
 1111094,no,yes,not_ready
 1111100,yes,yes,submitted
 1111138,yes,yes,submitted
-1111144,no,no,fixed
+1111144,no,no,submitted
 1111145,no,yes,not_ready
 1117722,yes,yes,submitted
 1119219,yes,yes,submitted
 1119873,no,no,submitted
-1123294,no,no,fixed
+1123294,no,no,submitted
