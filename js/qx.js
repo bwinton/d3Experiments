@@ -139,7 +139,7 @@ globalstrict:true, nomen:false, newcap:false */
     bugRow.append('a').text(bug => bug.id).classed('bugid', true)
       .attr('href', bug => 'https://bugzilla.mozilla.org/show_bug.cgi?id=' + bug.id);
     bugRow.append('span').classed('summary', true)
-      .text(bug => ' - ' + bug.summary + ' (' + getAssignee(bug) + ')');
+      .text(bug => bug.summary + ' (' + getAssignee(bug) + ')');
     bugRow.append('a').classed('twitter', true)
       .attr('href', bug => bug.twitter)
       .classed('missing', bug => !bug.twitter);

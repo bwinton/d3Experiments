@@ -30,9 +30,15 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
       .icon.missing {
         color: transparent;
       }
-      .fixed > .bugid,
+      .fixed > .summary::before {
+        content: ' ✓ ';
+        font-weight: bold️;
+      }
       .fixed > .summary {
-        text-decoration: line-through;
+        font-weight: bold;
+      }
+      .summary::before {
+        content: ' - ';
       }
       .twitter {
         float: right;
