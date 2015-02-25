@@ -98,10 +98,10 @@ globalstrict:true, nomen:false, newcap:false */
   var summarize = function (bugs) {
 
     var summary = [
-      {name: 'unknown', bugs: []},
-      {name: 'not_ready', bugs: []},
-      {name: 'submitted', bugs: []},
-      {name: 'assigned', bugs: []},
+      {name: ['unknown'], bugs: []},
+      {name: ['not_ready'], bugs: []},
+      {name: ['submitted'], bugs: []},
+      {name: ['assigned', 'fixed'], bugs: []},
     ];
     bugs.forEach(bug => {
       var status = orderedStatuses.get(bug.qx_status) || 0;
@@ -153,14 +153,19 @@ globalstrict:true, nomen:false, newcap:false */
       .style({'height': '0px', 'opacity': '0'})
       .remove();
 
-    d3.select('.summaries').selectAll('.category')
-      .data(summarize(bugs))
-      .enter().append('div').classed('category', true)
+    var category = d3.select('.summaries').selectAll('.category')
+      .data(summarize(bugs));
+
+    category.enter().append('div').classed('category', true)
       .style({
         'flex': category => category.bugs.length,
-        'background-color': category => getColour(category.name)
-      }).text(category => category.name + ': ' + category.bugs.length +
-        ' (' + percent(category.percentage) + ')');
+        'background-color': category => getColour(category.name[0])
+      });
+    category.selectAll('.name').data(category => category.name)
+      .enter().append('span').classed('name', true)
+      .text(name => name).classed('fixed', name => name === 'fixed');
+    category.append('span').text(category => ': ' + category.bugs.length);
+    category.append('span').text(category => ' (' + percent(category.percentage) + ')');
   };
 
   $.when(d3.jsonPromise(BUGZILLA_URL),

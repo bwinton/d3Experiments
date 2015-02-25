@@ -61,6 +61,16 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
         padding: 3px;
         white-space: nowrap;
       }
+      .name:first-child:before {
+        content: '';
+      }
+      .name:before {
+        content: ' / ';
+        font-weight: normal;
+      }
+      .name.fixed {
+        font-weight: bold;
+      }
     </style>
 
     <script src="bower_components/modernizr/modernizr.js"></script>
