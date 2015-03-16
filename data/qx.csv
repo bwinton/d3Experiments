@@ -1,5 +1,8 @@
 id,dxr,spec,qx_status
+260611,yes,no,not_ready
 306730,yes,yes,submitted
+453455,no,no,not_ready
+492320,no,yes,not_ready
 613785,no,yes,not_ready
 658467,no,yes,not_ready
 674925,no,yes,not_ready
@@ -8,6 +11,7 @@ id,dxr,spec,qx_status
 871158,no,no,not_ready
 942682,no,no,not_ready
 947854,no,yes,not_ready
+965322,no,no,not_ready
 986868,no,yes,not_ready
 980007,yes,yes,submitted
 980090,yes,yes,submitted
