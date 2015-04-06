@@ -186,7 +186,7 @@ globalstrict:true, nomen:false, newcap:false */
       });
 
       bug_list.forEach(bug => {
-        if (bug.status === 'RESOLVED') {
+        if (bug.status === 'RESOLVED' || bug.status === 'VERIFIED') {
           bug.qx_status = 'fixed';
         } else if (getAssignee(bug) !== 'nobody@mozilla.org') {
           bug.qx_status = 'assigned';
