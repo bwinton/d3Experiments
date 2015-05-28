@@ -15,10 +15,15 @@ globalstrict:true, nomen:false, newcap:false */
 (function () {
   var TRANSITION_DURATION = 500;
   var BUGZILLA_URL = 'https://bugzilla.mozilla.org/rest/bug?' +
-      'include_fields=id,assigned_to,summary,last_change_time,whiteboard,status,mentors,resolution&' +
+      'include_fields=id,product,assigned_to,summary,last_change_time,whiteboard,status,mentors,resolution&' +
       'status=ALL&' +
       'whiteboard=\[qx\]';
   var START_MOZILLA_URL = 'https://dl.dropboxusercontent.com/u/2301433/Twitter/startmozilla.tweets.txt';
+
+  var TEST_DATA = '/data/sample_bugzilla.json'
+
+  // uncomment next line to use test data
+  // BUGZILLA_URL = TEST_DATA
 
   var orderedStatuses = new Map([
     ['unknown', 0],
@@ -53,6 +58,23 @@ globalstrict:true, nomen:false, newcap:false */
     return a.id - b.id
   }
 
+  var products = [];
+
+  var getProductFromURL = function() {
+    var hash = window.location.hash;
+
+    if(hash) {
+      return hash.replace('#', '');
+    } else {
+      return false;
+    }
+  }
+  var currentProduct = getProductFromURL();
+
+  var filterFunc = function(d, i) {
+    return currentProduct ? d.product.split(' ').join('-') == currentProduct : true;
+  }
+
   var getColour = function (status) {
     switch (status) {
       case 'not_ready':
@@ -66,6 +88,30 @@ globalstrict:true, nomen:false, newcap:false */
         return 'rgb(255,127,127)';
     }
   };
+
+  var getClass = function (status) {
+    switch (status) {
+      case 'not_ready':
+        return '';
+      case 'submitted':
+        return 'success';
+      case 'assigned':
+      case 'fixed':
+        return 'info';
+      default:
+        return 'danger';
+    }
+  };
+
+  var highlightLinks = function() {
+    var links = $('.nav a');
+    var current = window.location.hash;
+    links.parent().removeClass('active');
+    links.each(function(){
+      var hash = $(this).attr('href');
+      if(hash == current) $(this).parent().addClass('active');
+    })
+  }
 
   var getAssignee = function (bug) {
     if (bug.assigned_to) {
@@ -96,7 +142,6 @@ globalstrict:true, nomen:false, newcap:false */
   }
 
   var summarize = function (bugs) {
-
     var summary = [
       {name: ['unknown'], bugs: []},
       {name: ['not_ready'], bugs: []},
@@ -116,31 +161,49 @@ globalstrict:true, nomen:false, newcap:false */
   }
 
   var draw = function (bugs) {
-    d3.select('.bugs').select('.loading').remove()
+
+    d3.select('.loading').remove();
+    d3.select('.bugs').selectAll('.bug').remove();
 
     var bugRow = d3.select('.bugs').selectAll('.bug')
-      .data(bugs.sort(sortFunc));
+      .data(bugs.filter(filterFunc).sort(sortFunc));
 
-    bugRow.enter().append('div').classed('bug', true)
+    bugRow.enter().append('tr').attr('class', bug => getClass(bug.qx_status))
+      .classed('bug', true)
       .classed('fixed', bug => bug.qx_status === 'fixed')
-      .style({'opacity': '0', 'background-color': bug => getColour(bug.qx_status)})
+      .style({'opacity': '0'})
       .attr('title', bug => bug.qx_status);
 
-    bugRow.append('span').classed('icon glyphicon glyphicon-user', true)
+    //product
+    bugRow.append('td').classed('product', true).text(bug => bug.product)
+
+    //icons
+    //mentor
+    var icons = bugRow.append('td').classed('icons', true);
+
+    icons.append('span').classed('icon glyphicon glyphicon-user', true)
       .classed('missing', bug => !getMentor(bug))
       .attr('title', bug => getMentor(bug) || 'nobody');
-    bugRow.append('span').classed('icon glyphicon glyphicon-search', true)
+    //dxr
+    icons.append('span').classed('icon glyphicon glyphicon-search', true)
       .classed('missing', bug => !getDxr(bug))
       .attr('title', bug => getDxr(bug) || 'missing link');
-    bugRow.append('span').classed('icon glyphicon glyphicon-picture', true)
+
+    //spec
+    icons.append('span').classed('icon glyphicon glyphicon-picture', true)
       .classed('missing', bug => !getSpec(bug))
       .attr('title', bug => getSpec(bug) || 'missing spec');
 
-    bugRow.append('a').text(bug => bug.id).classed('bugid', true)
+    bugRow.append('td').append('a').text(bug => bug.id).classed('bugid', true)
       .attr('href', bug => 'https://bugzilla.mozilla.org/show_bug.cgi?id=' + bug.id);
-    bugRow.append('span').classed('summary', true)
-      .text(bug => bug.summary + ' (' + getAssignee(bug) + ')');
-    bugRow.append('a').classed('twitter', true)
+
+    var summary = bugRow.append('td')
+    summary.append('span').classed('assignee', true)
+      .text(bug => getAssignee(bug));
+    summary.append('span').classed('summary', true)
+      .text(bug => bug.summary);
+
+    bugRow.append('td').append('a').classed('twitter', true)
       .attr('href', bug => bug.twitter)
       .classed('missing', bug => !bug.twitter);
 
@@ -153,8 +216,9 @@ globalstrict:true, nomen:false, newcap:false */
       .style({'height': '0px', 'opacity': '0'})
       .remove();
 
+    d3.select('.summaries').selectAll('.category').remove();
     var category = d3.select('.summaries').selectAll('.category')
-      .data(summarize(bugs));
+      .data(summarize(bugs.filter(filterFunc)));
 
     category.enter().append('div').classed('category', true)
       .style({
@@ -168,22 +232,38 @@ globalstrict:true, nomen:false, newcap:false */
     category.append('span').text(category => ' (' + percent(category.percentage) + ')');
   };
 
-  $.when(d3.jsonPromise(BUGZILLA_URL),
-           d3.csvPromise('data/qx.csv'),
-           d3.htmlPromise(START_MOZILLA_URL))
+  $.when(d3.jsonPromise(BUGZILLA_URL)
+           , d3.csvPromise('data/qx.csv')
+           , d3.htmlPromise(START_MOZILLA_URL)
+           )
     .then(function (bug_list, bug_statuses, startmozilla) {
       var bug_list = bug_list.bugs;
-
-      var lines = startmozilla.textContent.split('\n');
-      var posts = [];
-      lines = lines.forEach(line => {
-        if (line.startsWith('bug ')) {
-          line = line.split(' - ');
-          posts.push({id: line[0].slice(4), 'twitter': line[1]});
-        } else if (line) {
-          console.log('Error processing "' + line + '".');
-        }
+      bug_list.forEach(function(bug){
+        var product = bug.product.split(' ').join('-');
+        if (products.indexOf(product) == -1) products.push(product);
       });
+
+      var list = $('.nav');
+      var li = $('<li/>').appendTo(list);
+      $('<a/>').attr('href', '#').text("All").appendTo(li);
+      $.each(products, function(i, product){
+        var li = $('<li/>').appendTo(list);
+        $('<a/>').attr('href', '#' + product).text(product.split('-').join(' ')).appendTo(li);
+      })
+
+      var posts = [];
+
+      if(startmozilla) {
+        var lines = startmozilla.textContent.split('\n');
+        lines = lines.forEach(line => {
+          if (line.startsWith('bug ')) {
+            line = line.split(' - ');
+            posts.push({id: line[0].slice(4), 'twitter': line[1]});
+          } else if (line) {
+            // console.log('Error processing "' + line + '".');
+          }
+        });
+      }
 
       bug_list.forEach(bug => {
         if (bug.status === 'RESOLVED' || bug.status === 'VERIFIED') {
@@ -201,6 +281,12 @@ globalstrict:true, nomen:false, newcap:false */
           bug_status);
       });
       draw(bug_list);
+      highlightLinks();
+      window.onhashchange = function(){
+        currentProduct = getProductFromURL();
+        draw(bug_list);
+        highlightLinks();
+      }
     }).fail(function (error) {
       console.log('Fail', error);
     });

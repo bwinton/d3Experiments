@@ -1,0 +1,1090 @@
+
+
+{
+   "bugs" : [
+      {
+         "assigned_to" : "nobody@mozilla.org",
+         "assigned_to_detail" : {
+            "email" : "nobody@mozilla.org",
+            "id" : 1,
+            "name" : "nobody@mozilla.org",
+            "real_name" : "Nobody; OK to take it and work on it"
+         },
+         "id" : 260611,
+         "last_change_time" : "2015-05-15T17:49:18Z",
+         "mentors" : [],
+         "mentors_detail" : [],
+         "product" : "Firefox",
+         "resolution" : "",
+         "status" : "NEW",
+         "summary" : "leave bookmarks menu open when I middle click or ctrl click a bookmark",
+         "whiteboard" : "[qx]"
+      },
+      {
+         "assigned_to" : "dirkjan@ochtman.nl",
+         "assigned_to_detail" : {
+            "email" : "dirkjan@ochtman.nl",
+            "id" : 110217,
+            "name" : "dirkjan@ochtman.nl",
+            "real_name" : "Dirkjan Ochtman (:djc)"
+         },
+         "id" : 306730,
+         "last_change_time" : "2015-03-19T15:21:16Z",
+         "mentors" : [
+            "bwinton@mozilla.com"
+         ],
+         "mentors_detail" : [
+            {
+               "email" : "bwinton@mozilla.com",
+               "id" : 339434,
+               "name" : "bwinton@mozilla.com",
+               "real_name" : "Blake Winton (:bwinton)"
+            }
+         ],
+         "product" : "Core",
+         "resolution" : "",
+         "status" : "ASSIGNED",
+         "summary" : "Improve the \"Please enter the master password for the Software Security Device\" string",
+         "whiteboard" : "[kerh-coa][qx]"
+      },
+      {
+         "assigned_to" : "nobody@mozilla.org",
+         "assigned_to_detail" : {
+            "email" : "nobody@mozilla.org",
+            "id" : 1,
+            "name" : "nobody@mozilla.org",
+            "real_name" : "Nobody; OK to take it and work on it"
+         },
+         "id" : 453455,
+         "last_change_time" : "2015-04-25T21:00:55Z",
+         "mentors" : [],
+         "mentors_detail" : [],
+         "product" : "Toolkit",
+         "resolution" : "",
+         "status" : "REOPENED",
+         "summary" : "Make \"do this automatically for files like this from now on\" work even with \"content-disposition: attachment\"",
+         "whiteboard" : "[p-chrome] [sg:want] [Advo][qx]"
+      },
+      {
+         "assigned_to" : "nobody@mozilla.org",
+         "assigned_to_detail" : {
+            "email" : "nobody@mozilla.org",
+            "id" : 1,
+            "name" : "nobody@mozilla.org",
+            "real_name" : "Nobody; OK to take it and work on it"
+         },
+         "id" : 492320,
+         "last_change_time" : "2015-03-19T15:22:11Z",
+         "mentors" : [],
+         "mentors_detail" : [],
+         "product" : "Firefox",
+         "resolution" : "",
+         "status" : "NEW",
+         "summary" : "Keyboard shortcut for \"Undo close window\" fails if no windows are open (and \"recently closed windows\" submenu hasn't been shown)",
+         "whiteboard" : "[qx]"
+      },
+      {
+         "assigned_to" : "nobody@mozilla.org",
+         "assigned_to_detail" : {
+            "email" : "nobody@mozilla.org",
+            "id" : 1,
+            "name" : "nobody@mozilla.org",
+            "real_name" : "Nobody; OK to take it and work on it"
+         },
+         "id" : 613785,
+         "last_change_time" : "2015-03-22T10:44:07Z",
+         "mentors" : [],
+         "mentors_detail" : [],
+         "product" : "Toolkit",
+         "resolution" : "",
+         "status" : "NEW",
+         "summary" : "Switch to using tab-modal prompt dialogs for HTTP authentication",
+         "whiteboard" : "p=0 [qa+] [qx]"
+      },
+      {
+         "assigned_to" : "nobody@mozilla.org",
+         "assigned_to_detail" : {
+            "email" : "nobody@mozilla.org",
+            "id" : 1,
+            "name" : "nobody@mozilla.org",
+            "real_name" : "Nobody; OK to take it and work on it"
+         },
+         "id" : 658467,
+         "last_change_time" : "2014-12-13T00:32:44Z",
+         "mentors" : [],
+         "mentors_detail" : [],
+         "product" : "Firefox",
+         "resolution" : "",
+         "status" : "NEW",
+         "summary" : "Fade out tab label on overflow instead of ellipsis",
+         "whiteboard" : "p=0 [qx]"
+      },
+      {
+         "assigned_to" : "nobody@mozilla.org",
+         "assigned_to_detail" : {
+            "email" : "nobody@mozilla.org",
+            "id" : 1,
+            "name" : "nobody@mozilla.org",
+            "real_name" : "Nobody; OK to take it and work on it"
+         },
+         "id" : 674925,
+         "last_change_time" : "2015-04-11T12:31:23Z",
+         "mentors" : [],
+         "mentors_detail" : [],
+         "product" : "Firefox",
+         "resolution" : "",
+         "status" : "NEW",
+         "summary" : "Improve UI of detaching tabs",
+         "whiteboard" : "p=0 [qx]"
+      },
+      {
+         "assigned_to" : "at.light@live.com.au",
+         "assigned_to_detail" : {
+            "email" : "at.light@live.com.au",
+            "id" : 301584,
+            "name" : "at.light@live.com.au",
+            "real_name" : "Alan Thomas"
+         },
+         "id" : 713680,
+         "last_change_time" : "2015-03-11T02:00:58Z",
+         "mentors" : [],
+         "mentors_detail" : [],
+         "product" : "Core",
+         "resolution" : "",
+         "status" : "ASSIGNED",
+         "summary" : "Use Consolas as the default monospace font on Windows Vista & 7",
+         "whiteboard" : "[qx]"
+      },
+      {
+         "assigned_to" : "nobody@mozilla.org",
+         "assigned_to_detail" : {
+            "email" : "nobody@mozilla.org",
+            "id" : 1,
+            "name" : "nobody@mozilla.org",
+            "real_name" : "Nobody; OK to take it and work on it"
+         },
+         "id" : 734326,
+         "last_change_time" : "2015-04-24T12:18:35Z",
+         "mentors" : [
+            "jaws@mozilla.com",
+            "ntim.bugs@gmail.com"
+         ],
+         "mentors_detail" : [
+            {
+               "email" : "jaws@mozilla.com",
+               "id" : 409754,
+               "name" : "jaws@mozilla.com",
+               "real_name" : "Jared Wein [:jaws] (please needinfo? me)"
+            },
+            {
+               "email" : "ntim.bugs@gmail.com",
+               "id" : 445472,
+               "name" : "ntim.bugs@gmail.com",
+               "real_name" : "Tim Nguyen [:ntim]"
+            }
+         ],
+         "product" : "Firefox",
+         "resolution" : "",
+         "status" : "NEW",
+         "summary" : "Use Australis button styling for bookmarks toolbar items",
+         "whiteboard" : "[qx][lang=css]"
+      },
+      {
+         "assigned_to" : "nobody@mozilla.org",
+         "assigned_to_detail" : {
+            "email" : "nobody@mozilla.org",
+            "id" : 1,
+            "name" : "nobody@mozilla.org",
+            "real_name" : "Nobody; OK to take it and work on it"
+         },
+         "id" : 750054,
+         "last_change_time" : "2015-02-27T15:44:51Z",
+         "mentors" : [],
+         "mentors_detail" : [],
+         "product" : "Firefox",
+         "resolution" : "",
+         "status" : "NEW",
+         "summary" : "Update loading throbbers in secondary UI",
+         "whiteboard" : "p=0 [qx]"
+      },
+      {
+         "assigned_to" : "nobody@mozilla.org",
+         "assigned_to_detail" : {
+            "email" : "nobody@mozilla.org",
+            "id" : 1,
+            "name" : "nobody@mozilla.org",
+            "real_name" : "Nobody; OK to take it and work on it"
+         },
+         "id" : 871158,
+         "last_change_time" : "2014-12-13T01:10:47Z",
+         "mentors" : [],
+         "mentors_detail" : [],
+         "product" : "Firefox",
+         "resolution" : "",
+         "status" : "ASSIGNED",
+         "summary" : "Windows: Missing borders around the toolbox and customize area in customization mode",
+         "whiteboard" : "[Australis:P4+] [qx]"
+      },
+      {
+         "assigned_to" : "nobody@mozilla.org",
+         "assigned_to_detail" : {
+            "email" : "nobody@mozilla.org",
+            "id" : 1,
+            "name" : "nobody@mozilla.org",
+            "real_name" : "Nobody; OK to take it and work on it"
+         },
+         "id" : 942682,
+         "last_change_time" : "2014-12-13T01:19:49Z",
+         "mentors" : [],
+         "mentors_detail" : [],
+         "product" : "Firefox",
+         "resolution" : "",
+         "status" : "NEW",
+         "summary" : "Tab scrolling on mac is too sensitive",
+         "whiteboard" : "[Australis:P4-] [qx]"
+      },
+      {
+         "assigned_to" : "quanxunzhen@gmail.com",
+         "assigned_to_detail" : {
+            "email" : "quanxunzhen@gmail.com",
+            "id" : 373403,
+            "name" : "quanxunzhen@gmail.com",
+            "real_name" : "Xidorn Quan [:xidorn] (UTC+12)"
+         },
+         "id" : 947854,
+         "last_change_time" : "2015-05-16T04:42:55Z",
+         "mentors" : [],
+         "mentors_detail" : [],
+         "product" : "Core",
+         "resolution" : "FIXED",
+         "status" : "RESOLVED",
+         "summary" : "Exiting DOM fullscreen also exits window fullscreen mode",
+         "whiteboard" : "[qx]"
+      },
+      {
+         "assigned_to" : "nobody@mozilla.org",
+         "assigned_to_detail" : {
+            "email" : "nobody@mozilla.org",
+            "id" : 1,
+            "name" : "nobody@mozilla.org",
+            "real_name" : "Nobody; OK to take it and work on it"
+         },
+         "id" : 965322,
+         "last_change_time" : "2015-03-14T21:05:37Z",
+         "mentors" : [],
+         "mentors_detail" : [],
+         "product" : "Firefox",
+         "resolution" : "",
+         "status" : "NEW",
+         "summary" : "Full screen windows on Windows 8 have Windows 7 window controls",
+         "whiteboard" : "[qx][defect] p=0"
+      },
+      {
+         "assigned_to" : "nobody@mozilla.org",
+         "assigned_to_detail" : {
+            "email" : "nobody@mozilla.org",
+            "id" : 1,
+            "name" : "nobody@mozilla.org",
+            "real_name" : "Nobody; OK to take it and work on it"
+         },
+         "id" : 980007,
+         "last_change_time" : "2015-04-06T18:17:15Z",
+         "mentors" : [
+            "bwinton@mozilla.com"
+         ],
+         "mentors_detail" : [
+            {
+               "email" : "bwinton@mozilla.com",
+               "id" : 339434,
+               "name" : "bwinton@mozilla.com",
+               "real_name" : "Blake Winton (:bwinton)"
+            }
+         ],
+         "product" : "Firefox",
+         "resolution" : "",
+         "status" : "NEW",
+         "summary" : "Make the opacity of non-removable items transition after entering customization mode",
+         "whiteboard" : "[Australis:P4] [qx] [good-first-bug] [lang=css]"
+      },
+      {
+         "assigned_to" : "lewis.cowper@googlemail.com",
+         "assigned_to_detail" : {
+            "email" : "lewis.cowper@googlemail.com",
+            "id" : 531080,
+            "name" : "lewis.cowper@googlemail.com",
+            "real_name" : "Lewis Cowper"
+         },
+         "id" : 980090,
+         "last_change_time" : "2015-04-20T15:53:24Z",
+         "mentors" : [
+            "bwinton@mozilla.com"
+         ],
+         "mentors_detail" : [
+            {
+               "email" : "bwinton@mozilla.com",
+               "id" : 339434,
+               "name" : "bwinton@mozilla.com",
+               "real_name" : "Blake Winton (:bwinton)"
+            }
+         ],
+         "product" : "Firefox",
+         "resolution" : "FIXED",
+         "status" : "RESOLVED",
+         "summary" : "The link in empty customization palette should switch to add-ons tab if it's already open",
+         "whiteboard" : "[Australis:P4] [qx][good-first-bug]"
+      },
+      {
+         "assigned_to" : "lewis.cowper@googlemail.com",
+         "assigned_to_detail" : {
+            "email" : "lewis.cowper@googlemail.com",
+            "id" : 531080,
+            "name" : "lewis.cowper@googlemail.com",
+            "real_name" : "Lewis Cowper"
+         },
+         "id" : 985659,
+         "last_change_time" : "2015-03-05T22:04:05Z",
+         "mentors" : [
+            "bwinton@mozilla.com"
+         ],
+         "mentors_detail" : [
+            {
+               "email" : "bwinton@mozilla.com",
+               "id" : 339434,
+               "name" : "bwinton@mozilla.com",
+               "real_name" : "Blake Winton (:bwinton)"
+            }
+         ],
+         "product" : "Firefox",
+         "resolution" : "",
+         "status" : "ASSIGNED",
+         "summary" : "Improve usability and styling of feed button's menu, remove bookmarks menu button's \"subscribe to\" menuitem/submenu",
+         "whiteboard" : "[qx] [diamond] [lang=css] [lang=js]"
+      },
+      {
+         "assigned_to" : "nobody@mozilla.org",
+         "assigned_to_detail" : {
+            "email" : "nobody@mozilla.org",
+            "id" : 1,
+            "name" : "nobody@mozilla.org",
+            "real_name" : "Nobody; OK to take it and work on it"
+         },
+         "id" : 986868,
+         "last_change_time" : "2015-02-10T01:46:09Z",
+         "mentors" : [
+            "gijskruitbosch+bugs@gmail.com"
+         ],
+         "mentors_detail" : [
+            {
+               "email" : "gijskruitbosch+bugs@gmail.com",
+               "id" : 159069,
+               "name" : "gijskruitbosch+bugs@gmail.com",
+               "real_name" : ":Gijs Kruitbosch"
+            }
+         ],
+         "product" : "Firefox",
+         "resolution" : "",
+         "status" : "REOPENED",
+         "summary" : "During the customization mode transition you should not be able to click/hover items in the toolbars",
+         "whiteboard" : "[qx]"
+      },
+      {
+         "assigned_to" : "davezatch@gmail.com",
+         "assigned_to_detail" : {
+            "email" : "davezatch@gmail.com",
+            "id" : 525144,
+            "name" : "davezatch@gmail.com",
+            "real_name" : ""
+         },
+         "id" : 986970,
+         "last_change_time" : "2015-01-09T06:13:21Z",
+         "mentors" : [
+            "gijskruitbosch+bugs@gmail.com"
+         ],
+         "mentors_detail" : [
+            {
+               "email" : "gijskruitbosch+bugs@gmail.com",
+               "id" : 159069,
+               "name" : "gijskruitbosch+bugs@gmail.com",
+               "real_name" : ":Gijs Kruitbosch"
+            }
+         ],
+         "product" : "Firefox",
+         "resolution" : "FIXED",
+         "status" : "RESOLVED",
+         "summary" : "[OSX] Bookmark widget label is not aligned correctly in palette",
+         "whiteboard" : "[Australis:P4-] [diamond] [qx]"
+      },
+      {
+         "assigned_to" : "nobody@mozilla.org",
+         "assigned_to_detail" : {
+            "email" : "nobody@mozilla.org",
+            "id" : 1,
+            "name" : "nobody@mozilla.org",
+            "real_name" : "Nobody; OK to take it and work on it"
+         },
+         "id" : 995758,
+         "last_change_time" : "2015-02-10T23:32:12Z",
+         "mentors" : [],
+         "mentors_detail" : [],
+         "product" : "Firefox",
+         "resolution" : "",
+         "status" : "NEW",
+         "summary" : "Address bar doesn't capture focus if a new tab is created via Ctrl+T shortcut while in Customization mode",
+         "whiteboard" : "p=0 [Australis:P4-] [qx]"
+      },
+      {
+         "assigned_to" : "nobody@mozilla.org",
+         "assigned_to_detail" : {
+            "email" : "nobody@mozilla.org",
+            "id" : 1,
+            "name" : "nobody@mozilla.org",
+            "real_name" : "Nobody; OK to take it and work on it"
+         },
+         "id" : 1016361,
+         "last_change_time" : "2015-04-26T17:48:14Z",
+         "mentors" : [],
+         "mentors_detail" : [],
+         "product" : "Firefox",
+         "resolution" : "",
+         "status" : "NEW",
+         "summary" : "[UX] Design for a toolbar-less fullscreen mode on Mac",
+         "whiteboard" : "[qx] p=5"
+      },
+      {
+         "assigned_to" : "nobody@mozilla.org",
+         "assigned_to_detail" : {
+            "email" : "nobody@mozilla.org",
+            "id" : 1,
+            "name" : "nobody@mozilla.org",
+            "real_name" : "Nobody; OK to take it and work on it"
+         },
+         "id" : 1029761,
+         "last_change_time" : "2014-12-13T00:37:01Z",
+         "mentors" : [],
+         "mentors_detail" : [],
+         "product" : "Toolkit",
+         "resolution" : "",
+         "status" : "NEW",
+         "summary" : "Implement tab-modal authentication styling",
+         "whiteboard" : "[qx]"
+      },
+      {
+         "assigned_to" : "mstange@themasta.com",
+         "assigned_to_detail" : {
+            "email" : "mstange@themasta.com",
+            "id" : 293943,
+            "name" : "mstange@themasta.com",
+            "real_name" : "Markus Stange [:mstange]"
+         },
+         "id" : 1036929,
+         "last_change_time" : "2015-05-03T12:51:29Z",
+         "mentors" : [],
+         "mentors_detail" : [],
+         "product" : "Toolkit",
+         "resolution" : "",
+         "status" : "ASSIGNED",
+         "summary" : "Panel animations are slower on Mac than they are on Windows",
+         "whiteboard" : "[qx]"
+      },
+      {
+         "assigned_to" : "nobody@mozilla.org",
+         "assigned_to_detail" : {
+            "email" : "nobody@mozilla.org",
+            "id" : 1,
+            "name" : "nobody@mozilla.org",
+            "real_name" : "Nobody; OK to take it and work on it"
+         },
+         "id" : 1041514,
+         "last_change_time" : "2015-03-13T19:07:40Z",
+         "mentors" : [],
+         "mentors_detail" : [],
+         "product" : "Firefox",
+         "resolution" : "",
+         "status" : "NEW",
+         "summary" : "Don't show default browser prompt on first run if a user opts out in the installer",
+         "whiteboard" : "[fxgrowth] [qx]"
+      },
+      {
+         "assigned_to" : "farhaan.bukhsh@gmail.com",
+         "assigned_to_detail" : {
+            "email" : "farhaan.bukhsh@gmail.com",
+            "id" : 519477,
+            "name" : "farhaan.bukhsh@gmail.com",
+            "real_name" : "farhaan"
+         },
+         "id" : 1073234,
+         "last_change_time" : "2015-03-06T13:33:42Z",
+         "mentors" : [
+            "bwinton@mozilla.com"
+         ],
+         "mentors_detail" : [
+            {
+               "email" : "bwinton@mozilla.com",
+               "id" : 339434,
+               "name" : "bwinton@mozilla.com",
+               "real_name" : "Blake Winton (:bwinton)"
+            }
+         ],
+         "product" : "Firefox",
+         "resolution" : "FIXED",
+         "status" : "VERIFIED",
+         "summary" : "show small swatch of current theme in the themes button",
+         "whiteboard" : "[qx] [lang=js] [good first bug]"
+      },
+      {
+         "assigned_to" : "nobody@mozilla.org",
+         "assigned_to_detail" : {
+            "email" : "nobody@mozilla.org",
+            "id" : 1,
+            "name" : "nobody@mozilla.org",
+            "real_name" : "Nobody; OK to take it and work on it"
+         },
+         "id" : 1091592,
+         "last_change_time" : "2015-04-24T15:46:27Z",
+         "mentors" : [],
+         "mentors_detail" : [],
+         "product" : "Core",
+         "resolution" : "",
+         "status" : "NEW",
+         "summary" : "Implement improved style for <select> dropdowns",
+         "whiteboard" : "[qx]"
+      },
+      {
+         "assigned_to" : "farhaan.bukhsh@gmail.com",
+         "assigned_to_detail" : {
+            "email" : "farhaan.bukhsh@gmail.com",
+            "id" : 519477,
+            "name" : "farhaan.bukhsh@gmail.com",
+            "real_name" : "farhaan"
+         },
+         "id" : 1102710,
+         "last_change_time" : "2015-04-06T13:21:13Z",
+         "mentors" : [],
+         "mentors_detail" : [],
+         "product" : "Firefox",
+         "resolution" : "",
+         "status" : "NEW",
+         "summary" : "[OS X] \"Restart with Add-ons Disabled\" menu item text cut off in the help subview of the main menu button",
+         "whiteboard" : "[qx]"
+      },
+      {
+         "assigned_to" : "jtungul53@yahoo.com",
+         "assigned_to_detail" : {
+            "email" : "jtungul53@yahoo.com",
+            "id" : 529235,
+            "name" : "jtungul53@yahoo.com",
+            "real_name" : "John Tungul"
+         },
+         "id" : 1109477,
+         "last_change_time" : "2015-03-09T23:11:40Z",
+         "mentors" : [
+            "bwinton@mozilla.com"
+         ],
+         "mentors_detail" : [
+            {
+               "email" : "bwinton@mozilla.com",
+               "id" : 339434,
+               "name" : "bwinton@mozilla.com",
+               "real_name" : "Blake Winton (:bwinton)"
+            }
+         ],
+         "product" : "Toolkit",
+         "resolution" : "",
+         "status" : "ASSIGNED",
+         "summary" : "Search in Add-ons manager should be context sensitive",
+         "whiteboard" : "[qx] [lang=js] [good-first-bug]"
+      },
+      {
+         "assigned_to" : "nobody@mozilla.org",
+         "assigned_to_detail" : {
+            "email" : "nobody@mozilla.org",
+            "id" : 1,
+            "name" : "nobody@mozilla.org",
+            "real_name" : "Nobody; OK to take it and work on it"
+         },
+         "id" : 1111094,
+         "last_change_time" : "2015-03-06T20:55:38Z",
+         "mentors" : [],
+         "mentors_detail" : [],
+         "product" : "Firefox",
+         "resolution" : "",
+         "status" : "NEW",
+         "summary" : "Arrowpanel menus on about:newtab and about:home should use the same style as arrowpanels in the main chrome",
+         "whiteboard" : "[qx]"
+      },
+      {
+         "assigned_to" : "melisa.cecilia.mail@gmail.com",
+         "assigned_to_detail" : {
+            "email" : "melisa.cecilia.mail@gmail.com",
+            "id" : 531434,
+            "name" : "melisa.cecilia.mail@gmail.com",
+            "real_name" : "Melisa Cecilia [:ukimiawz]"
+         },
+         "id" : 1111100,
+         "last_change_time" : "2015-05-06T08:28:37Z",
+         "mentors" : [
+            "philipp@mozilla.com"
+         ],
+         "mentors_detail" : [
+            {
+               "email" : "philipp@mozilla.com",
+               "id" : 485651,
+               "name" : "philipp@mozilla.com",
+               "real_name" : "Philipp Sackl [:phlsa] please use needinfo"
+            }
+         ],
+         "product" : "Firefox",
+         "resolution" : "",
+         "status" : "ASSIGNED",
+         "summary" : "Fix typography in headers of nested panels",
+         "whiteboard" : "[qx] [lang=css] [good first bug]"
+      },
+      {
+         "assigned_to" : "nobody@mozilla.org",
+         "assigned_to_detail" : {
+            "email" : "nobody@mozilla.org",
+            "id" : 1,
+            "name" : "nobody@mozilla.org",
+            "real_name" : "Nobody; OK to take it and work on it"
+         },
+         "id" : 1111138,
+         "last_change_time" : "2015-01-27T22:00:45Z",
+         "mentors" : [
+            "gijskruitbosch+bugs@gmail.com"
+         ],
+         "mentors_detail" : [
+            {
+               "email" : "gijskruitbosch+bugs@gmail.com",
+               "id" : 159069,
+               "name" : "gijskruitbosch+bugs@gmail.com",
+               "real_name" : ":Gijs Kruitbosch"
+            }
+         ],
+         "product" : "Firefox",
+         "resolution" : "",
+         "status" : "NEW",
+         "summary" : "Window frame is slightly taller when using a lightweight theme",
+         "whiteboard" : "[qx] [lang=css]"
+      },
+      {
+         "assigned_to" : "nobody@mozilla.org",
+         "assigned_to_detail" : {
+            "email" : "nobody@mozilla.org",
+            "id" : 1,
+            "name" : "nobody@mozilla.org",
+            "real_name" : "Nobody; OK to take it and work on it"
+         },
+         "id" : 1111144,
+         "last_change_time" : "2014-12-13T20:14:21Z",
+         "mentors" : [],
+         "mentors_detail" : [],
+         "product" : "Firefox",
+         "resolution" : "DUPLICATE",
+         "status" : "RESOLVED",
+         "summary" : "[10.10] OK button in modal dialogs is broken in Yosemite",
+         "whiteboard" : "[qx]"
+      },
+      {
+         "assigned_to" : "nobody@mozilla.org",
+         "assigned_to_detail" : {
+            "email" : "nobody@mozilla.org",
+            "id" : 1,
+            "name" : "nobody@mozilla.org",
+            "real_name" : "Nobody; OK to take it and work on it"
+         },
+         "id" : 1111145,
+         "last_change_time" : "2014-12-16T11:26:40Z",
+         "mentors" : [],
+         "mentors_detail" : [],
+         "product" : "Core",
+         "resolution" : "",
+         "status" : "NEW",
+         "summary" : "[Windows] Dropdowns of URL bar and search box should use a better-looking shadow and border",
+         "whiteboard" : "[qx]"
+      },
+      {
+         "assigned_to" : "jtungul53@yahoo.com",
+         "assigned_to_detail" : {
+            "email" : "jtungul53@yahoo.com",
+            "id" : 529235,
+            "name" : "jtungul53@yahoo.com",
+            "real_name" : "John Tungul"
+         },
+         "id" : 1117722,
+         "last_change_time" : "2015-03-14T19:48:44Z",
+         "mentors" : [
+            "bwinton@mozilla.com"
+         ],
+         "mentors_detail" : [
+            {
+               "email" : "bwinton@mozilla.com",
+               "id" : 339434,
+               "name" : "bwinton@mozilla.com",
+               "real_name" : "Blake Winton (:bwinton)"
+            }
+         ],
+         "product" : "Firefox",
+         "resolution" : "FIXED",
+         "status" : "RESOLVED",
+         "summary" : "Replace the »update star« icon",
+         "whiteboard" : "[qx][lang=js][good first bug][lang=css]"
+      },
+      {
+         "assigned_to" : "nobody@mozilla.org",
+         "assigned_to_detail" : {
+            "email" : "nobody@mozilla.org",
+            "id" : 1,
+            "name" : "nobody@mozilla.org",
+            "real_name" : "Nobody; OK to take it and work on it"
+         },
+         "id" : 1119219,
+         "last_change_time" : "2015-05-14T12:33:16Z",
+         "mentors" : [
+            "gijskruitbosch+bugs@gmail.com"
+         ],
+         "mentors_detail" : [
+            {
+               "email" : "gijskruitbosch+bugs@gmail.com",
+               "id" : 159069,
+               "name" : "gijskruitbosch+bugs@gmail.com",
+               "real_name" : ":Gijs Kruitbosch"
+            }
+         ],
+         "product" : "Firefox",
+         "resolution" : "",
+         "status" : "NEW",
+         "summary" : "[Windows/Linux] Bookmark widget label is not aligned correctly in palette",
+         "whiteboard" : "[Australis:P4-] [diamond] [qx] [lang=css]"
+      },
+      {
+         "assigned_to" : "nobody@mozilla.org",
+         "assigned_to_detail" : {
+            "email" : "nobody@mozilla.org",
+            "id" : 1,
+            "name" : "nobody@mozilla.org",
+            "real_name" : "Nobody; OK to take it and work on it"
+         },
+         "id" : 1123294,
+         "last_change_time" : "2015-04-20T04:06:27Z",
+         "mentors" : [],
+         "mentors_detail" : [],
+         "product" : "Firefox",
+         "resolution" : "DUPLICATE",
+         "status" : "RESOLVED",
+         "summary" : "Improve strings in master password prompt",
+         "whiteboard" : "[qx]"
+      },
+      {
+         "assigned_to" : "aaronraimist@protonmail.ch",
+         "assigned_to_detail" : {
+            "email" : "aaronraimist@protonmail.ch",
+            "id" : 526277,
+            "name" : "aaronraimist@protonmail.ch",
+            "real_name" : "Aaron Raimist [:aaronraimist]"
+         },
+         "id" : 1136732,
+         "last_change_time" : "2015-05-26T23:53:21Z",
+         "mentors" : [
+            "bwinton@mozilla.com"
+         ],
+         "mentors_detail" : [
+            {
+               "email" : "bwinton@mozilla.com",
+               "id" : 339434,
+               "name" : "bwinton@mozilla.com",
+               "real_name" : "Blake Winton (:bwinton)"
+            }
+         ],
+         "product" : "Firefox",
+         "resolution" : "",
+         "status" : "NEW",
+         "summary" : "Limit Minimum Firefox Viewport Size - to not be able to shrink it to 0.",
+         "whiteboard" : "[qx]"
+      },
+      {
+         "assigned_to" : "nobody@mozilla.org",
+         "assigned_to_detail" : {
+            "email" : "nobody@mozilla.org",
+            "id" : 1,
+            "name" : "nobody@mozilla.org",
+            "real_name" : "Nobody; OK to take it and work on it"
+         },
+         "id" : 1137210,
+         "last_change_time" : "2015-03-10T19:00:47Z",
+         "mentors" : [
+            "bwinton@mozilla.com"
+         ],
+         "mentors_detail" : [
+            {
+               "email" : "bwinton@mozilla.com",
+               "id" : 339434,
+               "name" : "bwinton@mozilla.com",
+               "real_name" : "Blake Winton (:bwinton)"
+            }
+         ],
+         "product" : "Toolkit",
+         "resolution" : "DUPLICATE",
+         "status" : "RESOLVED",
+         "summary" : "Use normal pointer cursor when hovering over items in the reader view font panel",
+         "whiteboard" : "[qx][diamond]"
+      },
+      {
+         "assigned_to" : "bwinton@mozilla.com",
+         "assigned_to_detail" : {
+            "email" : "bwinton@mozilla.com",
+            "id" : 339434,
+            "name" : "bwinton@mozilla.com",
+            "real_name" : "Blake Winton (:bwinton)"
+         },
+         "id" : 1137211,
+         "last_change_time" : "2015-04-22T07:46:48Z",
+         "mentors" : [
+            "bwinton@mozilla.com",
+            "jaws@mozilla.com",
+            "margaret.leibovic@gmail.com"
+         ],
+         "mentors_detail" : [
+            {
+               "email" : "bwinton@mozilla.com",
+               "id" : 339434,
+               "name" : "bwinton@mozilla.com",
+               "real_name" : "Blake Winton (:bwinton)"
+            },
+            {
+               "email" : "jaws@mozilla.com",
+               "id" : 409754,
+               "name" : "jaws@mozilla.com",
+               "real_name" : "Jared Wein [:jaws] (please needinfo? me)"
+            },
+            {
+               "email" : "margaret.leibovic@gmail.com",
+               "id" : 346894,
+               "name" : "margaret.leibovic@gmail.com",
+               "real_name" : ":Margaret Leibovic"
+            }
+         ],
+         "product" : "Toolkit",
+         "resolution" : "FIXED",
+         "status" : "VERIFIED",
+         "summary" : "Font panel in reading view should disappear when clicking on the margins",
+         "whiteboard" : "[qx][diamond][lang=js]"
+      },
+      {
+         "assigned_to" : "nobody@mozilla.org",
+         "assigned_to_detail" : {
+            "email" : "nobody@mozilla.org",
+            "id" : 1,
+            "name" : "nobody@mozilla.org",
+            "real_name" : "Nobody; OK to take it and work on it"
+         },
+         "id" : 1137217,
+         "last_change_time" : "2015-04-06T13:29:03Z",
+         "mentors" : [
+            "bwinton@mozilla.com"
+         ],
+         "mentors_detail" : [
+            {
+               "email" : "bwinton@mozilla.com",
+               "id" : 339434,
+               "name" : "bwinton@mozilla.com",
+               "real_name" : "Blake Winton (:bwinton)"
+            }
+         ],
+         "product" : "Toolkit",
+         "resolution" : "DUPLICATE",
+         "status" : "RESOLVED",
+         "summary" : "Bottom corners of font panel in reader view should be rounded",
+         "whiteboard" : "[qx][diamond]"
+      },
+      {
+         "assigned_to" : "farhaan.bukhsh@gmail.com",
+         "assigned_to_detail" : {
+            "email" : "farhaan.bukhsh@gmail.com",
+            "id" : 519477,
+            "name" : "farhaan.bukhsh@gmail.com",
+            "real_name" : "farhaan"
+         },
+         "id" : 1139949,
+         "last_change_time" : "2015-04-02T21:16:11Z",
+         "mentors" : [
+            "bwinton@mozilla.com"
+         ],
+         "mentors_detail" : [
+            {
+               "email" : "bwinton@mozilla.com",
+               "id" : 339434,
+               "name" : "bwinton@mozilla.com",
+               "real_name" : "Blake Winton (:bwinton)"
+            }
+         ],
+         "product" : "Firefox",
+         "resolution" : "FIXED",
+         "status" : "RESOLVED",
+         "summary" : "Make the small swatch of current theme in the themes button smaller and rounded.",
+         "whiteboard" : "[qx] [lang=css] [good first bug]"
+      },
+      {
+         "assigned_to" : "nobody@mozilla.org",
+         "assigned_to_detail" : {
+            "email" : "nobody@mozilla.org",
+            "id" : 1,
+            "name" : "nobody@mozilla.org",
+            "real_name" : "Nobody; OK to take it and work on it"
+         },
+         "id" : 1147467,
+         "last_change_time" : "2015-04-01T14:02:52Z",
+         "mentors" : [],
+         "mentors_detail" : [],
+         "product" : "Firefox",
+         "resolution" : "",
+         "status" : "NEW",
+         "summary" : "Improve the transition when opening and closing the Reader View Side Bar",
+         "whiteboard" : "[readinglist-v2] [qx]"
+      },
+      {
+         "assigned_to" : "nobody@mozilla.org",
+         "assigned_to_detail" : {
+            "email" : "nobody@mozilla.org",
+            "id" : 1,
+            "name" : "nobody@mozilla.org",
+            "real_name" : "Nobody; OK to take it and work on it"
+         },
+         "id" : 1149500,
+         "last_change_time" : "2015-04-13T22:47:40Z",
+         "mentors" : [],
+         "mentors_detail" : [],
+         "product" : "Firefox",
+         "resolution" : "",
+         "status" : "NEW",
+         "summary" : "Master password prompt appears seemingly arbitrary",
+         "whiteboard" : "[ux-qx][qx]"
+      },
+      {
+         "assigned_to" : "nobody@mozilla.org",
+         "assigned_to_detail" : {
+            "email" : "nobody@mozilla.org",
+            "id" : 1,
+            "name" : "nobody@mozilla.org",
+            "real_name" : "Nobody; OK to take it and work on it"
+         },
+         "id" : 1149505,
+         "last_change_time" : "2015-05-25T18:02:27Z",
+         "mentors" : [],
+         "mentors_detail" : [],
+         "product" : "Firefox",
+         "resolution" : "",
+         "status" : "NEW",
+         "summary" : "Master password prompt shouldn't be modal unless absolutely necessary",
+         "whiteboard" : "[qx][ux-qx]"
+      },
+      {
+         "assigned_to" : "nobody@mozilla.org",
+         "assigned_to_detail" : {
+            "email" : "nobody@mozilla.org",
+            "id" : 1,
+            "name" : "nobody@mozilla.org",
+            "real_name" : "Nobody; OK to take it and work on it"
+         },
+         "id" : 1150067,
+         "last_change_time" : "2015-04-13T22:48:42Z",
+         "mentors" : [],
+         "mentors_detail" : [],
+         "product" : "Firefox",
+         "resolution" : "",
+         "status" : "NEW",
+         "summary" : "alert() and related calls should not throw the user into a different tab",
+         "whiteboard" : "[qx]"
+      },
+      {
+         "assigned_to" : "nobody@mozilla.org",
+         "assigned_to_detail" : {
+            "email" : "nobody@mozilla.org",
+            "id" : 1,
+            "name" : "nobody@mozilla.org",
+            "real_name" : "Nobody; OK to take it and work on it"
+         },
+         "id" : 1151295,
+         "last_change_time" : "2015-05-07T15:58:27Z",
+         "mentors" : [],
+         "mentors_detail" : [],
+         "product" : "Firefox",
+         "resolution" : "",
+         "status" : "NEW",
+         "summary" : "[10.10] Window background in customization mode should use translucent blur",
+         "whiteboard" : "[qx]"
+      },
+      {
+         "assigned_to" : "nobody@mozilla.org",
+         "assigned_to_detail" : {
+            "email" : "nobody@mozilla.org",
+            "id" : 1,
+            "name" : "nobody@mozilla.org",
+            "real_name" : "Nobody; OK to take it and work on it"
+         },
+         "id" : 1151449,
+         "last_change_time" : "2015-04-09T15:10:27Z",
+         "mentors" : [],
+         "mentors_detail" : [],
+         "product" : "Firefox",
+         "resolution" : "",
+         "status" : "NEW",
+         "summary" : "Use curly quotes and apostrophes instead of straight quotes in error pages",
+         "whiteboard" : "[qx]"
+      },
+      {
+         "assigned_to" : "nobody@mozilla.org",
+         "assigned_to_detail" : {
+            "email" : "nobody@mozilla.org",
+            "id" : 1,
+            "name" : "nobody@mozilla.org",
+            "real_name" : "Nobody; OK to take it and work on it"
+         },
+         "id" : 1152779,
+         "last_change_time" : "2015-04-13T22:46:59Z",
+         "mentors" : [],
+         "mentors_detail" : [],
+         "product" : "Firefox",
+         "resolution" : "",
+         "status" : "NEW",
+         "summary" : "Title bar color doesn't match color of window frame on Windows 7 with basic theme",
+         "whiteboard" : "[qx][ux-qx]"
+      },
+      {
+         "assigned_to" : "nobody@mozilla.org",
+         "assigned_to_detail" : {
+            "email" : "nobody@mozilla.org",
+            "id" : 1,
+            "name" : "nobody@mozilla.org",
+            "real_name" : "Nobody; OK to take it and work on it"
+         },
+         "id" : 1162628,
+         "last_change_time" : "2015-05-11T11:44:01Z",
+         "mentors" : [],
+         "mentors_detail" : [],
+         "product" : "Firefox",
+         "resolution" : "",
+         "status" : "NEW",
+         "summary" : "When rearranging/dragging tabs, the tab preview should only show if the tab will be torn off",
+         "whiteboard" : "[qx]"
+      },
+      {
+         "assigned_to" : "nobody@mozilla.org",
+         "assigned_to_detail" : {
+            "email" : "nobody@mozilla.org",
+            "id" : 1,
+            "name" : "nobody@mozilla.org",
+            "real_name" : "Nobody; OK to take it and work on it"
+         },
+         "id" : 1162635,
+         "last_change_time" : "2015-05-07T17:44:18Z",
+         "mentors" : [],
+         "mentors_detail" : [],
+         "product" : "Firefox",
+         "resolution" : "",
+         "status" : "NEW",
+         "summary" : "Remove bevel from notification bars on Windows",
+         "whiteboard" : "[qx]"
+      }
+   ]
+}
+
