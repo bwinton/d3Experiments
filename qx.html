@@ -26,6 +26,27 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
         padding: 0px !important;
         width: 60px;
       }
+
+      /* Stripe the colours, too. */
+      .table-striped > tbody > tr.danger:nth-child(2n) > td {
+        background-color: #FAE6E6;
+      }
+      .table-striped > tbody > tr.danger:hover:nth-child(2n) > td {
+        background-color: #EBCCCC;
+      }
+      .table-striped > tbody > tr.success:nth-child(2n) > td {
+        background-color: #E8FAE1;
+      }
+      .table-striped > tbody > tr.success:hover:nth-child(2n) > td {
+        background-color: #D0E9C6;
+      }
+      .table-striped > tbody > tr.info:nth-child(2n) > td {
+        background-color: #E0F5FF;
+      }
+      .table-striped > tbody > tr.info:hover:nth-child(2n) > td {
+        background-color: #C4E3F3;
+      }
+
       .product {
        font-size: 10px;
        color: rgba(0,0,0,0.4);
