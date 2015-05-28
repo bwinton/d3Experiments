@@ -74,6 +74,7 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
       .fixed .summary::before {
         content: ' ✓ ';
       }
+      .name.fixed,
       .fixed .summary {
         opacity: 0.5;
         text-decoration: line-through;
@@ -113,15 +114,11 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
         color: #B8B8B8;
         color: rgba(0,0,0,0.7);
       }
-      .name:first-child:before {
+      .name:last-child:after {
         content: '';
       }
-      .name:before {
+      .name:after {
         content: ' / ';
-        font-weight: normal;
-      }
-      .name.fixed {
-        font-weight: bold;
       }
       .bugs {
         margin-top: 1em;

@@ -225,7 +225,8 @@ globalstrict:true, nomen:false, newcap:false */
         'flex': category => category.bugs.length,
         'background-color': category => getColour(category.name[0])
       });
-    category.selectAll('.name').data(category => category.name)
+    category.append('span').classed('names', true)
+      .selectAll('.name').data(category => category.name)
       .enter().append('span').classed('name', true)
       .text(name => name).classed('fixed', name => name === 'fixed');
     category.append('span').text(category => ': ' + category.bugs.length);
