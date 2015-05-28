@@ -3,21 +3,15 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-/*jshint forin:true, noarg:true, noempty:true, eqeqeq:true, bitwise:true,
-strict:true, undef:true, unused:true, curly:true, browser:true, white:true,
-moz:true, esnext:false, indent:2, maxerr:50, devel:true, node:true, boss:true,
-globalstrict:true, nomen:false, newcap:false */
-
-/*global d3:false, $:false */
-
 'use strict';
 
 (function () {
   var TRANSITION_DURATION = 500;
+  var WHITEBOARD = /\[qx(?::[^\]]*)*\]/;
   var BUGZILLA_URL = 'https://bugzilla.mozilla.org/rest/bug?' +
       'include_fields=id,product,assigned_to,summary,last_change_time,whiteboard,status,mentors,resolution&' +
       'status=ALL&' +
-      'whiteboard=\[qx\]';
+      'whiteboard=\[qx';
   var START_MOZILLA_URL = 'https://dl.dropboxusercontent.com/u/2301433/Twitter/startmozilla.tweets.txt';
 
   var TEST_DATA = '/data/sample_bugzilla.json'
@@ -127,8 +121,8 @@ globalstrict:true, nomen:false, newcap:false */
     return false;
   }
 
-  var getDxr = function (bug) {
-    if (bug.dxr && bug.dxr !== 'no') {
+  var getLink = function (bug) {
+    if (bug.link && bug.link !== 'no') {
       return 'has link';
     }
     return false;
@@ -184,10 +178,10 @@ globalstrict:true, nomen:false, newcap:false */
     icons.append('span').classed('icon glyphicon glyphicon-user', true)
       .classed('missing', bug => !getMentor(bug))
       .attr('title', bug => getMentor(bug) || 'nobody');
-    //dxr
+    //link
     icons.append('span').classed('icon glyphicon glyphicon-search', true)
-      .classed('missing', bug => !getDxr(bug))
-      .attr('title', bug => getDxr(bug) || 'missing link');
+      .classed('missing', bug => !getLink(bug))
+      .attr('title', bug => getLink(bug) || 'missing link');
 
     //spec
     icons.append('span').classed('icon glyphicon glyphicon-picture', true)
@@ -233,11 +227,8 @@ globalstrict:true, nomen:false, newcap:false */
     category.append('span').text(category => ' (' + percent(category.percentage) + ')');
   };
 
-  $.when(d3.jsonPromise(BUGZILLA_URL)
-           , d3.csvPromise('data/qx.csv')
-           , d3.htmlPromise(START_MOZILLA_URL)
-           )
-    .then(function (bug_list, bug_statuses, startmozilla) {
+  $.when(d3.jsonPromise(BUGZILLA_URL), d3.htmlPromise(START_MOZILLA_URL))
+    .then(function (bug_list, startmozilla) {
       var bug_list = bug_list.bugs;
       bug_list.forEach(function(bug){
         var product = bug.product.split(' ').join('-');
@@ -267,19 +258,29 @@ globalstrict:true, nomen:false, newcap:false */
       }
 
       bug_list.forEach(bug => {
+        var whiteboard = WHITEBOARD.exec(bug.whiteboard)[0].slice(4, -1).split(":");
+        whiteboard.forEach(key => {
+          if (key) {
+            if (key !== 'link' && key !== 'spec') {
+              console.log("!!!!!!!", bug.id, key);
+            }
+            bug[key] = true;
+          }
+        });
+
         if (bug.status === 'RESOLVED' || bug.status === 'VERIFIED') {
           bug.qx_status = 'fixed';
         } else if (getAssignee(bug) !== 'nobody@mozilla.org') {
           bug.qx_status = 'assigned';
+        } else if (getMentor(bug) && bug.link && bug.spec) {
+          bug.qx_status = 'submitted';
+        } else {
+          bug.qx_status = 'not_ready';
         }
       });
 
       $.each(bug_list, (i, bug) => {
-        var bug_status = bug.qx_status ? {qx_status: bug.qx_status} : {};
-        $.extend(bug,
-          bug_statuses.find(test => +test.id === +bug.id),
-          posts.find(test => +test.id === +bug.id),
-          bug_status);
+        $.extend(bug, posts.find(test => +test.id === +bug.id));
       });
       draw(bug_list);
       highlightLinks();
