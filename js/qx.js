@@ -198,9 +198,9 @@ globalstrict:true, nomen:false, newcap:false */
       .attr('href', bug => 'https://bugzilla.mozilla.org/show_bug.cgi?id=' + bug.id);
 
     var summary = bugRow.append('td')
-    summary.append('p').classed('assignee', true)
+    summary.append('span').classed('assignee', true)
       .text(bug => getAssignee(bug));
-    summary.append('p').classed('summary', true)
+    summary.append('span').classed('summary', true)
       .text(bug => bug.summary);
 
     bugRow.append('td').append('a').classed('twitter', true)
