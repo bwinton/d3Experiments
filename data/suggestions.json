@@ -1,0 +1,36 @@
+[
+  [["aurora", "43.0a2"], [
+    [false, false, 13653],
+    [false, true, 1606],
+    [true, false, 112],
+    [true, true, 1881]
+  ]],
+
+  [["default", "43.0a1"], [
+    [false, false, 1],
+    [true, false, 1],
+    [true, true, 1]
+  ]],
+
+  [["default", "43.0a2"], [
+    [false, false, 30]
+  ]],
+
+  [["default", "44.0a1"], [
+    [true, true, 2]
+  ]],
+
+  [["nightly", "43.0a1"], [
+    [false, false, 587],
+    [false, true, 50],
+    [true, false, 4],
+    [true, true, 54]
+  ]],
+
+  [["nightly", "44.0a1"], [
+    [false, false, 5321],
+    [false, true, 1446],
+    [true, false, 63],
+    [true, true, 1162]
+  ]]
+]

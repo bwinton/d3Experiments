@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+License, v. 2.0. If a copy of the MPL was not distributed with this
+file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+<!--[if lt IE 7]>    <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>     <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>     <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Suggestions?</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/suggestions.css">
+
+    <script src="bower_components/modernizr/modernizr.js"></script>
+  </head>
+  <body>
+    <!--[if lt IE 7]>
+      <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+
+    <div class="main wrapper clearfix">
+      <a id="btn-popularity" class="btn order pull-right" href="#" role="button">Split Versions</a>
+      <a id="btn-version" class="btn order pull-right" href="#" role="button">Split Channels</a>
+      <div class="charts"></div>
+      <div id="log"></div>
+      <div id="error" class="hide"></div>
+    </div> <!-- #main -->
+
+    <script src="bower_components/d3/d3.min.js" charset="utf-8"></script>
+    <script src="bower_components/jquery/dist/jquery.min.js" charset="utf-8"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js" charset="utf-8"></script>
+    <script src="bower_components/d3.chart/d3.chart.min.js" charset="utf-8"></script>
+
+    <script src="js/d3promise.js"></script>
+    <script src="js/chart.bar.js"></script>
+    <script src="js/suggestions.js"></script>
+  </body>
+</html>

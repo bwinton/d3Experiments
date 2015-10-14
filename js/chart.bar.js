@@ -3,13 +3,9 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-/*jshint forin:true, noarg:true, noempty:true, eqeqeq:true, bitwise:true,
-strict:true, undef:true, unused:true, curly:true, browser:true, white:true,
-moz:true, esnext:false, indent:2, maxerr:50, devel:true, node:true, boss:true,
-globalstrict:true, nomen:false, newcap:false */
+/*global d3:false */
 
-"use strict";
-
+'use strict';
 
 /**
 * A bar chart. Required data format:
@@ -80,13 +76,13 @@ d3.chart('BarChart', {
       .classed('xlabels', true)
       .attr('height', chart.margins.bottom);
 
-    chart.on("change:width", function() {
+    chart.on('change:width', function() {
       chart.x.range([0, chart.w - chart.margins.left]);
       chart.layers.bars.attr('width', chart.w - chart.margins.left);
       chart.layers.xlabels.attr('width', chart.w - chart.margins.left);
     });
 
-    chart.on("change:height", function() {
+    chart.on('change:height', function() {
       chart.y.range([chart.h - chart.margins.bottom - chart.margins.top, 0]);
       chart.areas.ylabels
         .attr('height', chart.h - chart.margins.bottom - chart.margins.top - 1);
@@ -109,7 +105,7 @@ d3.chart('BarChart', {
         chart.bars = data.length;
 
         // compute box size
-        console.log("bar_width", chart.w, chart.margins.left, chart.margins.padding, chart.bars);
+        console.log('bar_width', chart.w, chart.margins.left, chart.margins.padding, chart.bars);
         chart.bar_width = (chart.w - chart.margins.left - ((chart.bars - 1) *
           chart.margins.padding)) / chart.bars;
 
@@ -192,19 +188,16 @@ d3.chart('BarChart', {
     // render the bars.
     var onEnter = function() {
       this.attr('x', function(d, i) {
-            return chart.x(i) - 0.5;
-          })
-          .attr('y', function(d) {
-            return chart.h - chart.margins.bottom -
-              chart.margins.top - chart.y(chart.datamax - d.value) - 0.5;
-          })
-          .attr('val', function(d) {
-            return d.value;
-          })
-          .attr('width', chart.bar_width)
-          .attr('height', function(d) {
-            return chart.y(chart.datamax - d.value);
-          });
+        return chart.x(i) - 0.5;
+      }).attr('y', function(d) {
+        return chart.h - chart.margins.bottom -
+          chart.margins.top - chart.y(chart.datamax - d.value) - 0.5;
+      }).attr('val', function(d) {
+        return d.value;
+      }).attr('width', chart.bar_width)
+      .attr('height', function(d) {
+        return chart.y(chart.datamax - d.value);
+      });
     };
 
     chart.layer('bars').on('enter', onEnter);
@@ -247,7 +240,7 @@ d3.chart('BarChart', {
     // adjust the base width
     this.base.attr('width', this.w);
 
-    this.trigger("change:width");
+    this.trigger('change:width');
     if (this.data) this.draw(this.data);
 
     return this;
@@ -268,7 +261,7 @@ d3.chart('BarChart', {
     // adjust the base width
     this.base.attr('height', this.h);
 
-    this.trigger("change:height");
+    this.trigger('change:height');
     if (this.data) this.draw(this.data);
     return this;
   }

@@ -1,0 +1,43 @@
+body {
+  padding: 15px;
+}
+
+.charts {
+  border: 1px solid green;
+  width: 550px;
+}
+
+.btn {
+  transition: color 1s, background-color 1s, border-color 1s;
+}
+
+.hide {
+  display: none;
+}
+
+.error {
+  background-color: #FF3355;
+}
+
+.section {
+  margin-top: 15px;
+}
+
+.values {
+  margin-left: 15px;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.bar {
+  fill: steelblue;
+}
+
+.x.axis path {
+  display: none;
+}
