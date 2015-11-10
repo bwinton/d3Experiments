@@ -267,6 +267,7 @@
 
     var priority = $('#priority');
     priority.attr('href', '#' + getProductFromURL() + (isURLSorted() ? '' : '<'));
+    priority.toggleClass('active', isURLSorted());
   };
 
   $.when(d3.jsonPromise(BUGZILLA_URL), d3.htmlPromise(START_MOZILLA_URL))
