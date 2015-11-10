@@ -123,6 +123,10 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
       .bugs {
         margin-top: 1em;
       }
+
+      .navbar-btn.navbar-right {
+        margin-right: 25px;
+      }
     </style>
 
     <script src="bower_components/modernizr/modernizr.js"></script>
@@ -136,7 +140,9 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
       <nav class="navbar navbar-default">
         <div class="container">
           <div class="navbar-brand">Quality of Experience Bugs</div>
-          <ul class="nav navbar-nav"></ul>
+          <ul class="nav navbar-nav">
+          </ul>
+          <a href="#" id="priority" class="btn btn-default navbar-btn navbar-right">Sort by priority</a>
         </div>
       </nav>
       <div class="summaries"></div>
