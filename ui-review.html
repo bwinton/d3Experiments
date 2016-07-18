@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+License, v. 2.0. If a copy of the MPL was not distributed with this
+file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+<!--[if lt IE 7]>    <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>     <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>     <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>UI-Review Bugs!</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <style type="text/css">
+      td {
+        padding: 5px !important;
+        padding-bottom: 0 !important;
+      }
+      td.icons {
+        padding: 0 !important;
+        width: 60px;
+      }
+
+      /* Stripe the colours, too. */
+      .table-striped > tbody > tr.danger:nth-child(2n) > td {
+        background-color: #FAE6E6;
+      }
+      .table-striped > tbody > tr.danger:hover:nth-child(2n) > td {
+        background-color: #EBCCCC;
+      }
+      .table-striped > tbody > tr.success:nth-child(2n) > td {
+        background-color: #E8FAE1;
+      }
+      .table-striped > tbody > tr.success:hover:nth-child(2n) > td {
+        background-color: #D0E9C6;
+      }
+      .table-striped > tbody > tr.info:nth-child(2n) > td {
+        background-color: #E0F5FF;
+      }
+      .table-striped > tbody > tr.info:hover:nth-child(2n) > td {
+        background-color: #C4E3F3;
+      }
+
+      .product {
+        font-size: 10px;
+        color: #999999;
+        color: rgba(0,0,0,0.4);
+        font-weight: bold;
+      }
+      .loading {
+        margin-top: 3em;
+      }
+      .header {
+        margin-top: 1em;
+      }
+      .icon {
+        padding: 0;
+        width: 20px;
+        padding-top: 10px;
+      }
+      .icon.missing {
+        opacity: 0.05;
+      }
+      .summary::before {
+        content: ' ◌ ';
+        opacity: 0.5;
+      }
+      .fixed .summary::before {
+        content: ' ✓ ';
+      }
+      .name.fixed,
+      .fixed .summary {
+        opacity: 0.5;
+        text-decoration: line-through;
+      }
+      .assignee {
+        font-size: 11px;
+        font-weight: bold;
+        opacity: 0.5;
+        padding-left: 12px;
+        float: right;
+      }
+      a.missing {
+        display: none;
+      }
+      .summaries {
+        margin-top: 0;
+        width: 100%;
+        display: flex;
+        border-radius: 4px;
+        border: 1px solid #DDD;
+        margin-bottom: 1em;
+      }
+      .category {
+        padding: 3px;
+        white-space: nowrap;
+        text-align: center;
+        font-size: 11px;
+        color: #B8B8B8;
+        color: rgba(0,0,0,0.7);
+      }
+      .name:last-child:after {
+        content: '';
+      }
+      .name:after {
+        content: ' / ';
+      }
+      .bugs {
+        margin-top: 1em;
+      }
+
+      .navbar-btn.navbar-right {
+        margin-right: 25px;
+      }
+    </style>
+
+    <script src="bower_components/modernizr/modernizr.js"></script>
+  </head>
+  <body>
+    <!--[if lt IE 7]>
+      <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+
+    <div class="container">
+      <nav class="navbar navbar-default">
+        <div class="container">
+          <div class="navbar-brand">UI-Review Bugs</div>
+          <ul class="nav navbar-nav">
+          </ul>
+          <a href="#" id="priority" class="btn btn-default navbar-btn navbar-right">Sort by priority</a>
+        </div>
+      </nav>
+      <div class="summaries"></div>
+      <h2 class="loading text-center">Loading…</h2>
+      <table class="table table-responsive table-striped table-hover">
+        <tbody class="bugs">
+        </tbody>
+      </table>
+    </div> <!-- #main -->
+
+    <script src="bower_components/d3/d3.min.js" charset="utf-8"></script>
+    <script src="bower_components/jquery/dist/jquery.min.js" charset="utf-8"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js" charset="utf-8"></script>
+
+    <script src="js/d3promise.js"></script>
+    <script src="js/ui-review.js"></script>
+  </body>
+</html>
