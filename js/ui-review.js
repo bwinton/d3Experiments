@@ -13,7 +13,7 @@
   var TRANSITION_DURATION = 500;
   var BUGZILLA_URL = 'https://bugzilla.mozilla.org/rest/bug?' +
       'include_fields=id,product,assigned_to,summary,last_change_time,whiteboard,status,resolution,priority&' +
-      'status=ALL&' +
+      'status=UNCONFIRMED&status=NEW&status=ASSIGNED&status=REOPENED&' +
       'keywords=uiwanted&' +
       'product=Firefox&product=Toolkit&product=Core';
       // 'product=Firefox,Core,Toolkit';
@@ -25,10 +25,8 @@
 
   var orderedStatuses = new Map([
     ['unknown', 0],
-    ['not_ready', 1],
-    ['submitted', 2],
-    ['assigned', 3],
-    ['fixed', 4]
+    ['assigned', 1],
+    ['not_ready', 2]
   ]);
 
   var percent = d3.format('0.1%');
@@ -96,9 +94,9 @@
   var getColour = (status) => {
     switch (status) {
     case 'not_ready':
-      return 'rgb(192,214,255)';
+      return 'rgb(255,255,255)';
     case 'assigned':
-      return 'rgb(127,255,127)';
+      return 'rgb(192,214,255)';
     default:
       return 'rgb(255,127,127)';
     }
@@ -145,9 +143,8 @@
   var summarize = (bugs) => {
     var summary = [
       {name: ['unknown'], bugs: []},
-      {name: ['not_ready'], bugs: []},
-      {name: ['submitted'], bugs: []},
-      {name: ['assigned', 'fixed'], bugs: []}
+      {name: ['assigned'], bugs: []},
+      {name: ['not_ready'], bugs: []}
     ];
     bugs.forEach(bug => {
       var status = orderedStatuses.get(bug.qx_status) || 0;
