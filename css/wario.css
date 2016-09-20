@@ -8,12 +8,23 @@ body {
   border: 2px solid gray;
 }
 
-.line {
+#chart {
+  border-radius: 3px;
+  margin-bottom: 2em;
+  overflow: hidden;
   width: 30vw;
+}
+
+.line {
   background-color: #eee;
   padding: 3px 1em;
 }
 
 .heart {
   background-color: pink;
+}
+
+.total {
+  background-color: lightblue;
+  border-top: 1px solid #2882a1;
 }
