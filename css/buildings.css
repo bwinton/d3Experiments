@@ -2,6 +2,10 @@ body {
   background-color: #fff;
 }
 
+.explanation {
+  margin-left: calc(5vw - 6px);
+}
+
 .display {
   position: absolute;
   top: 5vh;
