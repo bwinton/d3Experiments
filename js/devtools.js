@@ -13,29 +13,14 @@ globalstrict:true, nomen:false, newcap:false */
 'use strict';
 
 $(function () {
-  THREE.SVGLoader = function ( manager ) {
-  	this.manager = ( manager !== undefined ) ? manager : THREE.DefaultLoadingManager;
-  };
-
-  THREE.SVGLoader.prototype = {
-  	constructor: THREE.SVGLoader,
-  	load: function ( url, onLoad, onProgress, onError ) {
-  		var scope = this;
-  		var parser = new DOMParser();
-  		var loader = new THREE.FileLoader( scope.manager );
-  		loader.load( url, function ( svgString ) {
-  			var doc = parser.parseFromString( svgString, 'image/svg+xml' ); // application/xml
-  			onLoad( doc.documentElement );
-  		}, onProgress, onError );
-  	}
-  };
-
+  let spinfox = window.location.search.replace('?','') == 'spinfox';
+  console.log(spinfox);
   let addNoise = (baseGeometry, geometry, noiseX, noiseY, noiseZ) => {
-    var noiseX = noiseX || 0.2;
-    var noiseY = noiseY || noiseX;
-    var noiseZ = noiseZ || noiseY;
-    for(var i = 0; i < geometry.vertices.length; i++){
-      var v = geometry.vertices[i];
+    noiseX = noiseX || 0.2;
+    noiseY = noiseY || noiseX;
+    noiseZ = noiseZ || noiseY;
+    for (let i = 0; i < geometry.vertices.length; i++) {
+      let v = geometry.vertices[i];
       const base = baseGeometry.vertices[i];
       v.x = (base.x + v.x) / 2 - noiseX / 2 + Math.random() * noiseX;
       v.y = (base.y + v.y) / 2 - noiseY / 2 + Math.random() * noiseY;
@@ -44,19 +29,47 @@ $(function () {
     return geometry;
   }
 
-  var renderer = new THREE.WebGLRenderer({ antialias: true });
+  let renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setClearColor( 0xeeeeee );
 
   document.getElementById('content').appendChild(renderer.domElement);
 
-  var camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+  let camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
   camera.position.set(5, 5, 40);
   camera.lookAt(new THREE.Vector3(0, 0, 0));
 
-  var scene = new THREE.Scene();
+  let scene = new THREE.Scene();
 
-	var lights = [];
+  let fox = null;
+  let img = document.getElementById('fox');
+  img.style.display = 'none';
+
+  if (spinfox) {
+    img.onload = () => {
+      let canvas = document.createElement("canvas");
+      canvas.width = img.width;
+      canvas.height = img.height;
+      let ctx = canvas.getContext("2d");
+      ctx.drawImage(img, 0, 0);
+
+      let texture = new THREE.Texture(canvas);
+      texture.needsUpdate = true;
+
+      let geometry = new THREE.PlaneGeometry(30, 30);
+      let material = new THREE.MeshBasicMaterial({ map: texture, side: THREE.DoubleSide, transparent: true });
+      material.map.minFilter = THREE.LinearFilter;
+      material.map.needsUpdate = true;
+      fox = new THREE.Mesh(geometry, material);
+      fox.translateZ(16.5);
+      scene.add(fox);
+    };
+  } else {
+    img.style.display = 'inline-block';
+  }
+  img.setAttribute('src', 'images/devedition.svg');
+
+	let lights = [];
 	lights[ 0 ] = new THREE.PointLight( 0xffffff, 1, 0 );
 	lights[ 1 ] = new THREE.PointLight( 0xffffff, 1, 0 );
 	lights[ 2 ] = new THREE.PointLight( 0xffffff, 1, 0 );
@@ -98,6 +111,9 @@ $(function () {
   let animate = () => {
   	requestAnimationFrame( animate );
     sphere.rotation.y -= 0.01;
+    if (fox) {
+      fox.rotation.z -= 0.02;
+    }
   	renderer.render( scene, camera );
   }
   animate();

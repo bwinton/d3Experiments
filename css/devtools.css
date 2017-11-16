@@ -2,7 +2,7 @@ body {
   margin: 0;
 }
 
-canvas {
+#content canvas {
   position: absolute;
   left: 0;
   top: 0;
