@@ -14,7 +14,17 @@ globalstrict:true, nomen:false, newcap:false */
 
 $(function () {
   let spinfox = window.location.search.replace('?','') == 'spinfox';
-  console.log(spinfox);
+  let img = document.getElementById('fox');
+  let canvas = document.getElementById('globe');
+  let gl = canvas.getContext('webgl', {
+    failIfMajorPerformanceCaveat: true
+  });
+
+  if (!gl && !spinfox) {
+    img.setAttribute('src', 'images/devedition-original.svg');
+    return;
+  }
+
   let addNoise = (baseGeometry, geometry, noiseX, noiseY, noiseZ) => {
     noiseX = noiseX || 0.2;
     noiseY = noiseY || noiseX;
@@ -29,7 +39,7 @@ $(function () {
     return geometry;
   }
 
-  let renderer = new THREE.WebGLRenderer({ antialias: true });
+  let renderer = new THREE.WebGLRenderer({ canvas: canvas, context: gl, antialias: true });
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setClearColor( 0xeeeeee );
 
@@ -42,7 +52,6 @@ $(function () {
   let scene = new THREE.Scene();
 
   let fox = null;
-  let img = document.getElementById('fox');
   img.style.display = 'none';
 
   if (spinfox) {
