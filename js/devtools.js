@@ -25,20 +25,6 @@ $(function () {
     return;
   }
 
-  let addNoise = (baseGeometry, geometry, noiseX, noiseY, noiseZ) => {
-    noiseX = noiseX || 0.2;
-    noiseY = noiseY || noiseX;
-    noiseZ = noiseZ || noiseY;
-    for (let i = 0; i < geometry.vertices.length; i++) {
-      let v = geometry.vertices[i];
-      const base = baseGeometry.vertices[i];
-      v.x = (base.x + v.x) / 2 - noiseX / 2 + Math.random() * noiseX;
-      v.y = (base.y + v.y) / 2 - noiseY / 2 + Math.random() * noiseY;
-      v.z = (base.z + v.z) / 2 - noiseZ / 2 + Math.random() * noiseZ;
-    }
-    return geometry;
-  }
-
   let renderer = new THREE.WebGLRenderer({ canvas: canvas, context: gl, antialias: true });
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setClearColor( 0xeeeeee );
@@ -70,7 +56,10 @@ $(function () {
       material.map.minFilter = THREE.LinearFilter;
       material.map.needsUpdate = true;
       fox = new THREE.Mesh(geometry, material);
-      fox.translateZ(16.5);
+      fox.scale.set(0.8, 0.8, 0.8);
+      fox.translateX(2);
+      fox.translateY(2);
+      fox.translateZ(18);
       scene.add(fox);
     };
   } else {
@@ -79,9 +68,9 @@ $(function () {
   img.setAttribute('src', 'images/devedition.svg');
 
 	let lights = [];
-	lights[ 0 ] = new THREE.PointLight( 0xffffff, 1, 0 );
-	lights[ 1 ] = new THREE.PointLight( 0xffffff, 1, 0 );
-	lights[ 2 ] = new THREE.PointLight( 0xffffff, 1, 0 );
+	lights[ 0 ] = new THREE.PointLight( 0xffffff, .5, 0 );
+	lights[ 1 ] = new THREE.PointLight( 0xffffff, .5, 0 );
+	lights[ 2 ] = new THREE.PointLight( 0xffffff, .5, 0 );
 
 	lights[ 0 ].position.set( 0, 200, 0 );
 	lights[ 1 ].position.set( 100, 200, 100 );
@@ -91,31 +80,41 @@ $(function () {
 	scene.add( lights[ 1 ] );
 	scene.add( lights[ 2 ] );
 
-  const baseGeometry = new THREE.SphereGeometry(16,27,31);
-  let sphereGeometry = new THREE.SphereGeometry(16,27,31);
-
   let sphere = new THREE.Object3D();
-  sphere.add(new THREE.Mesh(
-    sphereGeometry,
-    new THREE.MeshPhongMaterial( {
-			color: 0x156289,
-			emissive: 0x072534,
-			side: THREE.DoubleSide,
-			flatShading: true
-		} )
-  ));
-
-	sphere.add( new THREE.LineSegments(
-		sphereGeometry,
-		new THREE.LineBasicMaterial( {
-			color: 0xffffff,
-			transparent: true,
-			opacity: 0.5
-		} )
-	) );
-
-  addNoise(baseGeometry, sphereGeometry, 0.7);
   scene.add(sphere);
+
+  var loader = new THREE.VRMLLoader();
+  loader.load('images/devedition-globe-vrml/globe-hires.wrl', globe => {
+    const MESH_SCALE = 0.0156;
+
+    let globeGeometry = globe.children[0].children[0].geometry;
+    globeGeometry.scale(MESH_SCALE, MESH_SCALE, MESH_SCALE);
+    globeGeometry.translate(0, -18, 0);
+
+    sphere.add(new THREE.Mesh(
+      globeGeometry,
+      new THREE.MeshPhongMaterial( {
+        color: 0x2053cf,
+        emissive: 0x000000,
+        side: THREE.DoubleSide,
+        polygonOffset: true,
+        polygonOffsetFactor: 1, // positive value pushes polygon further away
+        polygonOffsetUnits: 1,
+  			// flatShading: true
+  		} )
+    ));
+
+    let edgesGeometry = new THREE.EdgesGeometry(globeGeometry);
+    // edgesGeometry.scale(1.1, 1.1, 1.1);
+  	sphere.add( new THREE.LineSegments(
+  		edgesGeometry,
+  		new THREE.LineBasicMaterial( {
+  			color: 0x58c1ff,
+  			transparent: true,
+  			opacity: 0.3
+  		} )
+  	) );
+  });
 
   let animate = () => {
   	requestAnimationFrame( animate );
