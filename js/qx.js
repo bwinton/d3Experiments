@@ -16,7 +16,7 @@
       'include_fields=id,product,assigned_to,summary,last_change_time,whiteboard,status,mentors,resolution,priority&' +
       'status=ALL&' +
       'whiteboard=\[qx';
-  var START_MOZILLA_URL = 'https://dl.dropboxusercontent.com/u/2301433/Twitter/startmozilla.tweets.txt';
+  var START_MOZILLA_URL = 'https://uc602dfc0a5ec5ff63570795e3b3.dl.dropboxusercontent.com/cd/0/get/AN9vfALtCnqTAKQHDcuL9b-CvpCLyhyc8bH-xg0jGI8wLDnuQ50qNpnv_Ei1-anhrHORJiN46xkPhuZAr8W9wHJk6cMrPx0OqqvLcKAZjraAGaap_o2tl5XDGnjmq63eBGRkIqhddeDefviLgtuxADyz1Ld5d1rscT4aRRtBXHDPMIvBB1R6L0alhMQe17zZqdCaci5rZoo8o2FxoANJ3jlK/file?dl=1';
 
   // var TEST_DATA = '/data/sample_bugzilla.json'
 
