@@ -25,15 +25,22 @@ $(function () {
     return;
   }
 
-  let renderer = new THREE.WebGLRenderer({ canvas: canvas, context: gl, antialias: true });
+  let renderer = new THREE.WebGLRenderer({ canvas: canvas, context: gl, antialias: true, alpha: true });
   renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setClearColor( 0xeeeeee );
+  // renderer.setClearColor( 0xeeeeee );
+  renderer.setClearColor( 0x000000, 0 ); // transparent
 
   document.getElementById('content').appendChild(renderer.domElement);
 
   let camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-  camera.position.set(5, 5, 40);
+  camera.position.set(5, 5, 66.5);
   camera.lookAt(new THREE.Vector3(0, 0, 0));
+
+  window.addEventListener('resize', e => {
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+  });
 
   let scene = new THREE.Scene();
 
@@ -56,9 +63,9 @@ $(function () {
       material.map.minFilter = THREE.LinearFilter;
       material.map.needsUpdate = true;
       fox = new THREE.Mesh(geometry, material);
-      fox.scale.set(0.8, 0.8, 0.8);
-      fox.translateX(2);
-      fox.translateY(2);
+      fox.scale.set(1.75, 1.75, 1.75);
+      fox.translateX(1);
+      fox.translateY(0);
       fox.translateZ(18);
       scene.add(fox);
     };
