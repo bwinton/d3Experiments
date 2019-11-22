@@ -97,7 +97,7 @@ $(function () {
 var widgets = {};
 var clicks = [];
 
-$.when(d3.csvPromise('data/' + platform + '/widgets.csv'), d3.csvPromise('https://people.mozilla.org/~bwinton/heatmap_data/0.csv'))
+$.when(d3.csvPromise('data/' + platform + '/widgets.csv'), d3.csvPromise('data/heatmap_data/0.csv'))
   .then(function (widget_data, click_data) {
     var groups = {
       'additional': [],
